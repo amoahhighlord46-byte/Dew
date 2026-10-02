@@ -1,0 +1,1233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Morning Dew Montessori School | Effiduasi, Ashanti</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+tailwind.config={
+  theme:{
+    extend:{
+      colors:{
+        primary:'#E65100',
+        'primary-dark':'#BF360C',
+        'primary-light':'#FFF3E0',
+        'slate-900':'#0F172A',
+        'slate-800':'#1E293B',
+      },
+      fontFamily:{
+        sans:['Inter','sans-serif'],
+        display:['Poppins','sans-serif']
+      }
+    }
+  }
+}
+</script>
+<style>
+*{font-family:'Inter',sans-serif}
+.font-display{font-family:'Poppins',sans-serif}
+::-webkit-scrollbar{width:5px;height:5px}
+::-webkit-scrollbar-thumb{background:#CBD5E1;border-radius:999px}
+::-webkit-scrollbar-track{background:transparent}
+.toggle{appearance:none;width:44px;height:24px;background:#E2E8F0;border-radius:999px;position:relative;cursor:pointer;transition:.2s}
+.toggle:checked{background:#E65100}
+.toggle::after{content:'';position:absolute;width:18px;height:18px;background:white;border-radius:50%;top:3px;left:3px;transition:.2s;box-shadow:0 1px 3px rgba(0,0,0,.2)}
+.toggle:checked::after{left:23px}
+.card{transition:all .2s}
+.card:hover{transform:translateY(-1px);box-shadow:0 8px 24px rgba(0,0,0,.06)}
+@media print{.no-print{display:none!important}}
+</style>
+</head>
+<body class="bg-[#F8FAFC] text-slate-800 overflow-x-hidden">
+<!-- Mobile Overlay -->
+<div id="overlay" class="fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-40 hidden lg:hidden" onclick="toggleSidebar()"></div>
+
+<div class="flex min-h-screen">
+  <!-- SIDEBAR -->
+  <aside id="sidebar" class="fixed lg:static inset-y-0 left-0 w-[288px] bg-[#0F172A] text-white flex flex-col z-50 -translate-x-full lg:translate-x-0 transition-transform duration-300 overflow-hidden">
+    <!-- Logo -->
+    <div class="px-6 pt-6 pb-5 border-b border-white/10">
+      <div class="flex items-center gap-3">
+        <div class="w-11 h-11 rounded-xl bg-[#E65100] flex items-center justify-center text-white shadow-lg shadow-orange-900/20">
+          <i class="fa-solid fa-sun text-xl"></i>
+        </div>
+        <div class="flex-1 min-w-0">
+          <h1 class="font-display font-bold leading-none text-[15px] tracking-tight">MORNING DEW</h1>
+          <p class="text-[11px] tracking-[0.18em] text-orange-400 font-semibold">MONTESSORI SCHOOL</p>
+          <p class="text-[11px] text-slate-400 flex items-center gap-1 mt-0.5"><i class="fa-solid fa-location-dot text-[10px]"></i> Effiduasi, Ashanti - Ghana</p>
+        </div>
+      </div>
+      <div class="mt-4 flex items-center gap-2 text-[11px]">
+        <span class="px-2.5 py-1 rounded-full bg-white/10 border border-white/10 flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> Supabase Live</span>
+        <span class="px-2.5 py-1 rounded-full bg-[#E65100] font-semibold">2024/25 • Term 2</span>
+      </div>
+    </div>
+
+    <!-- Nav -->
+    <nav class="flex-1 overflow-y-auto px-3 py-4 space-y-1">
+      <p class="px-3 text-[11px] tracking-widest font-semibold text-slate-500 mb-2">MAIN MENU</p>
+      <a data-nav="dashboard" onclick="showSection('dashboard')" class="nav-item flex items-center gap-3 px-3 py-2.5 rounded-xl bg-[#E65100] text-white font-medium cursor-pointer">
+        <i class="fa-solid fa-table-columns w-5 text-center"></i> Dashboard <span class="ml-auto text-xs bg-white/20 px-2 py-0.5 rounded-full">12</span>
+      </a>
+      <a data-nav="students" onclick="showSection('students')" class="nav-item flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-white/10 text-slate-300 hover:text-white cursor-pointer"><i class="fa-solid fa-user-graduate w-5 text-center"></i> Students <span class="ml-auto text-xs bg-slate-700 px-2 py-0.5 rounded-full">342</span></a>
+      <a data-nav="teachers" onclick="showSection('teachers')" class="nav-item flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-white/10 text-slate-300 cursor-pointer"><i class="fa-solid fa-chalkboard-user w-5 text-center"></i> Teachers & Staff</a>
+      <a data-nav="classes" onclick="showSection('classes')" class="nav-item flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-white/10 text-slate-300 cursor-pointer"><i class="fa-solid fa-door-open w-5 text-center"></i> Classes & Subjects</a>
+      <a data-nav="attendance" onclick="showSection('attendance')" class="nav-item flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-white/10 text-slate-300 cursor-pointer"><i class="fa-solid fa-clipboard-check w-5 text-center"></i> Attendance <span class="ml-auto w-2 h-2 bg-emerald-400 rounded-full"></span></a>
+      <a data-nav="fees" onclick="showSection('fees')" class="nav-item flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-white/10 text-slate-300 cursor-pointer"><i class="fa-solid fa-sack-dollar w-5 text-center"></i> Fees & Payments</a>
+      <a data-nav="expenses" onclick="showSection('expenses')" class="nav-item flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-white/10 text-slate-300 cursor-pointer"><i class="fa-solid fa-receipt w-5 text-center"></i> Expenses</a>
+      <a data-nav="exams" onclick="showSection('exams')" class="nav-item flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-white/10 text-slate-300 cursor-pointer"><i class="fa-solid fa-award w-5 text-center"></i> Exams & Results</a>
+      <a data-nav="parents" onclick="showSection('parents')" class="nav-item flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-white/10 text-slate-300 cursor-pointer"><i class="fa-solid fa-people-roof w-5 text-center"></i> Parents Directory</a>
+      <a data-nav="notices" onclick="showSection('notices')" class="nav-item flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-white/10 text-slate-300 cursor-pointer"><i class="fa-solid fa-bullhorn w-5 text-center"></i> Notices <span class="ml-auto bg-[#E65100] text-white text-xs px-1.5 py-0.5 rounded">3</span></a>
+      <p class="px-3 text-[11px] tracking-widest font-semibold text-slate-500 mt-6 mb-2">ADMINISTRATION</p>
+      <a data-nav="reports" onclick="showSection('reports')" class="nav-item flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-white/10 text-slate-300 cursor-pointer"><i class="fa-solid fa-chart-line w-5 text-center"></i> Reports & Analytics</a>
+      <a data-nav="roles" onclick="showSection('roles')" class="nav-item flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-white/10 text-slate-300 cursor-pointer"><i class="fa-solid fa-shield-halved w-5 text-center"></i> Roles & Permissions</a>
+      <a onclick="openArchitecture()" class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-white/10 text-slate-300 cursor-pointer"><i class="fa-solid fa-code w-5 text-center"></i> Tech Stack <i class="fa-solid fa-arrow-up-right-from-square ml-auto text-xs opacity-60"></i></a>
+    </nav>
+
+    <!-- User -->
+    <div class="p-4 border-t border-white/10">
+      <div class="bg-white/5 rounded-2xl p-3 flex items-center gap-3 border border-white/10">
+        <img src="https://i.pravatar.cc/100?img=12" class="w-10 h-10 rounded-full object-cover border-2 border-white/20">
+        <div class="flex-1 min-w-0">
+          <p class="text-sm font-semibold leading-none">Mr. Kwabena Mensah</p>
+          <p class="text-xs text-slate-400">Headmaster • Admin</p>
+        </div>
+        <button class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20"><i class="fa-solid fa-ellipsis"></i></button>
+      </div>
+      <p class="text-[11px] text-slate-500 text-center mt-3">© 2024 Morning Dew • Vercel Deploy</p>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="flex-1 min-w-0 flex flex-col">
+    <!-- Top Bar -->
+    <header class="h-[64px] bg-white border-b border-slate-200 flex items-center gap-3 px-4 lg:px-8 sticky top-0 z-30">
+      <button onclick="toggleSidebar()" class="lg:hidden w-10 h-10 rounded-xl border border-slate-200 flex items-center justify-center"><i class="fa-solid fa-bars"></i></button>
+      
+      <div class="hidden md:flex items-center gap-2 text-sm">
+        <span class="w-8 h-8 rounded-lg bg-orange-50 text-[#E65100] flex items-center justify-center"><i class="fa-solid fa-graduation-cap"></i></span>
+        <div>
+          <p class="font-semibold leading-none text-slate-900">Morning Dew Montessori</p>
+          <p class="text-xs text-slate-500">Effiduasi • Ashanti Region</p>
+        </div>
+        <span class="hidden lg:inline-flex ml-3 px-3 py-1 rounded-full bg-emerald-50 text-emerald-700 text-xs font-semibold border border-emerald-200"><i class="fa-solid fa-circle text-[7px] mr-1.5"></i> Academic Session Active</span>
+      </div>
+
+      <div class="flex-1 flex justify-center lg:justify-end">
+        <div class="relative w-full max-w-[420px]">
+          <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-sm"></i>
+          <input id="globalSearch" oninput="handleGlobalSearch(this.value)" placeholder="Search students, staff, fees, notices..." class="w-full pl-10 pr-4 py-2.5 rounded-full border border-slate-200 bg-slate-50 focus:bg-white focus:border-[#E65100] focus:ring-4 focus:ring-orange-100 outline-none text-sm">
+          <span class="hidden sm:flex absolute right-1.5 top-1/2 -translate-y-1/2 text-[11px] bg-white border border-slate-200 px-2 py-1 rounded-full text-slate-500">⌘ K</span>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-2">
+        <button onclick="showSection('notices')" class="relative w-10 h-10 rounded-full border border-slate-200 bg-white flex items-center justify-center hover:bg-slate-50">
+          <i class="fa-regular fa-bell text-slate-600"></i>
+          <span class="absolute -top-1 -right-1 w-5 h-5 bg-[#E65100] text-white text-xs rounded-full flex items-center justify-center font-bold">3</span>
+        </button>
+        <button class="hidden sm:flex items-center gap-2 pl-2 pr-3 py-1.5 rounded-full border border-slate-200 bg-white">
+          <img src="https://i.pravatar.cc/100?img=12" class="w-7 h-7 rounded-full">
+          <span class="text-sm font-medium hidden lg:block">Admin</span>
+          <i class="fa-solid fa-chevron-down text-xs text-slate-400"></i>
+        </button>
+        <button onclick="openModal('student')" class="hidden lg:inline-flex items-center gap-2 bg-[#E65100] hover:bg-[#BF360C] text-white px-5 py-2.5 rounded-full font-semibold text-sm shadow-lg shadow-orange-200"><i class="fa-solid fa-plus"></i> Add Student</button>
+      </div>
+    </header>
+
+    <!-- Content -->
+    <div class="flex-1 overflow-auto bg-[#F8FAFC] p-4 lg:p-7">
+      
+      <!-- DASHBOARD -->
+      <section id="sec-dashboard" class="space-y-6">
+        <!-- Title -->
+        <div class="flex flex-wrap items-start justify-between gap-4">
+          <div>
+            <h2 class="font-display text-2xl lg:text-[28px] font-bold text-slate-900">Dashboard Overview</h2>
+            <p class="text-sm text-slate-500 mt-1">Welcome back, Headmaster. Here's what's happening at Morning Dew today — <span class="font-medium text-slate-700">Friday, 12 April 2024</span></p>
+          </div>
+          <div class="flex items-center gap-2">
+            <button onclick="exportReport()" class="px-4 py-2 rounded-full border border-slate-200 bg-white text-sm font-medium hover:bg-slate-50"><i class="fa-solid fa-download mr-2 text-slate-500"></i> Export Report</button>
+            <button onclick="showSection('attendance')" class="px-5 py-2 rounded-full bg-[#0F172A] text-white text-sm font-semibold hover:bg-slate-800"><i class="fa-solid fa-clipboard-check mr-2"></i> Take Attendance</button>
+          </div>
+        </div>
+
+        <!-- Stats -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
+          <div class="card bg-white rounded-2xl p-5 border border-slate-200">
+            <div class="flex items-start justify-between">
+              <div class="w-11 h-11 rounded-xl bg-orange-50 text-[#E65100] flex items-center justify-center text-lg"><i class="fa-solid fa-user-graduate"></i></div>
+              <span class="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 text-xs font-semibold border border-emerald-200">+12 this term</span>
+            </div>
+            <p class="text-3xl font-bold mt-4 tracking-tight">342</p>
+            <p class="text-sm font-medium text-slate-600">Total Students</p>
+            <div class="mt-3 flex items-center gap-2 text-xs">
+              <span class="flex-1 h-1.5 bg-slate-100 rounded-full overflow-hidden"><span class="block h-full w-[82%] bg-[#E65100] rounded-full"></span></span>
+              <span class="text-slate-500">82% capacity</span>
+            </div>
+            <div class="mt-3 flex gap-4 text-xs">
+              <span><b>182</b> Boys</span><span><b>160</b> Girls</span><span class="text-emerald-600 font-semibold">• 18 Classes</span>
+            </div>
+          </div>
+          <div class="card bg-white rounded-2xl p-5 border border-slate-200">
+            <div class="flex items-start justify-between">
+              <div class="w-11 h-11 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center text-lg"><i class="fa-solid fa-chalkboard-user"></i></div>
+              <span class="px-2.5 py-1 rounded-full bg-amber-50 text-amber-700 text-xs font-semibold border border-amber-200">3 on leave</span>
+            </div>
+            <p class="text-3xl font-bold mt-4 tracking-tight">24</p>
+            <p class="text-sm font-medium text-slate-600">Teaching & Non-Teaching Staff</p>
+            <div class="mt-4 grid grid-cols-3 text-center divide-x divide-slate-100">
+              <div><p class="font-bold">18</p><p class="text-xs text-slate-500">Teachers</p></div>
+              <div><p class="font-bold">4</p><p class="text-xs text-slate-500">Admin</p></div>
+              <div><p class="font-bold">2</p><p class="text-xs text-slate-500">Support</p></div>
+            </div>
+          </div>
+          <div class="card bg-white rounded-2xl p-5 border border-slate-200">
+            <div class="flex items-start justify-between">
+              <div class="w-11 h-11 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center text-lg"><i class="fa-solid fa-clipboard-check"></i></div>
+              <span class="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 text-xs font-semibold border border-emerald-200"><i class="fa-solid fa-arrow-trend-up mr-1"></i>94.2%</span>
+            </div>
+            <p class="text-3xl font-bold mt-4 tracking-tight">94.2<span class="text-xl">%</span></p>
+            <p class="text-sm font-medium text-slate-600">Today's Attendance</p>
+            <div class="mt-3 flex items-center gap-1.5 text-xs font-medium">
+              <span class="px-2 py-1 rounded-full bg-emerald-500 text-white">Present 322</span>
+              <span class="px-2 py-1 rounded-full bg-amber-100 text-amber-700">Late 8</span>
+              <span class="px-2 py-1 rounded-full bg-red-100 text-red-700">Absent 12</span>
+            </div>
+            <p class="text-xs text-slate-500 mt-2">Last updated: 08:45 AM</p>
+          </div>
+          <div class="card bg-[#0F172A] rounded-2xl p-5 border border-slate-800 text-white relative overflow-hidden">
+            <div class="absolute -right-6 -top-6 w-32 h-32 bg-[#E65100] opacity-20 rounded-full blur-2xl"></div>
+            <div class="flex items-start justify-between relative">
+              <div class="w-11 h-11 rounded-xl bg-[#E65100] flex items-center justify-center text-lg"><i class="fa-solid fa-sack-dollar"></i></div>
+              <span class="px-2.5 py-1 rounded-full bg-white/10 text-white text-xs font-semibold">82% collected</span>
+            </div>
+            <p class="text-2xl font-bold mt-4 tracking-tight">GH₵ 128,430</p>
+            <p class="text-sm font-medium text-slate-300">Fees Collected (Term 2)</p>
+            <div class="mt-3 h-1.5 bg-white/10 rounded-full overflow-hidden"><div class="h-full w-[82%] bg-[#E65100] rounded-full"></div></div>
+            <div class="mt-2 flex justify-between text-xs text-slate-400"><span>Target: GH₵ 156k</span><span class="text-amber-300">Due: GH₵ 27,570</span></div>
+          </div>
+        </div>
+
+        <!-- Charts + Notices -->
+        <div class="grid grid-cols-1 xl:grid-cols-3 gap-4">
+          <div class="xl:col-span-2 bg-white rounded-2xl border border-slate-200 p-5">
+            <div class="flex items-center justify-between mb-4">
+              <h3 class="font-semibold">Attendance Trend (Last 7 Days)</h3>
+              <select class="text-sm border border-slate-200 rounded-full px-3 py-1.5 bg-white"><option>This Week</option><option>Last Week</option></select>
+            </div>
+            <div class="h-[240px]"><canvas id="attendanceChart"></canvas></div>
+          </div>
+          <div class="bg-white rounded-2xl border border-slate-200 p-5">
+            <h3 class="font-semibold">Fee Collection vs Target</h3>
+            <p class="text-xs text-slate-500">Term 2 • 2024/2025 Academic Year</p>
+            <div class="h-[240px] mt-2"><canvas id="financeChart"></canvas></div>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 xl:grid-cols-3 gap-4">
+          <div class="xl:col-span-2 bg-white rounded-2xl border border-slate-200 overflow-hidden">
+            <div class="p-5 flex items-center justify-between border-b border-slate-100">
+              <h3 class="font-semibold flex items-center gap-2"><span class="w-2 h-2 bg-[#E65100] rounded-full"></span> Recent Enrollments</h3>
+              <button onclick="showSection('students')" class="text-sm font-semibold text-[#E65100] hover:underline">View All →</button>
+            </div>
+            <div class="overflow-x-auto">
+              <table class="w-full text-sm">
+                <thead class="text-xs text-slate-500 bg-slate-50/70"><tr><th class="text-left font-medium px-5 py-3">Student</th><th class="text-left font-medium px-3 py-3">Class</th><th class="text-left font-medium px-3 py-3">Date</th><th class="text-left font-medium px-3 py-3">Fees</th></tr></thead>
+                <tbody id="recentEnrollBody" class="divide-y divide-slate-100"></tbody>
+              </table>
+            </div>
+          </div>
+          <div class="space-y-4">
+            <div class="bg-white rounded-2xl border border-slate-200 p-5">
+              <h3 class="font-semibold mb-3 flex items-center gap-2"><i class="fa-solid fa-bullhorn text-[#E65100]"></i> Notices & Announcements</h3>
+              <div id="dashNotices" class="space-y-3"></div>
+              <button onclick="showSection('notices')" class="mt-4 w-full py-2.5 rounded-full border border-slate-200 text-sm font-semibold hover:bg-slate-50">View All Notices</button>
+            </div>
+            <div class="bg-[#E65100] rounded-2xl p-5 text-white relative overflow-hidden">
+              <div class="absolute -right-10 -bottom-10 w-40 h-40 bg-white/10 rounded-full"></div>
+              <h4 class="font-semibold relative">Quick Actions</h4>
+              <div class="grid grid-cols-2 gap-2 mt-3 relative">
+                <button onclick="openModal('student')" class="bg-white text-[#E65100] rounded-xl py-2.5 text-sm font-semibold"><i class="fa-solid fa-plus mr-1"></i> Add Student</button>
+                <button onclick="showSection('attendance')" class="bg-black/20 hover:bg-black/30 rounded-xl py-2.5 text-sm font-semibold border border-white/20">Mark Attendance</button>
+                <button onclick="showSection('fees')" class="bg-black/20 hover:bg-black/30 rounded-xl py-2.5 text-sm font-semibold border border-white/20">Record Payment</button>
+                <button onclick="openModal('notice')" class="bg-black/20 hover:bg-black/30 rounded-xl py-2.5 text-sm font-semibold border border-white/20">Post Notice</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Supabase Banner -->
+        <div class="bg-white rounded-2xl border border-slate-200 p-4 flex flex-wrap items-center gap-3">
+          <span class="text-xs font-bold tracking-widest text-slate-500">TECH STACK</span>
+          <span class="h-4 w-px bg-slate-200"></span>
+          <span class="inline-flex items-center gap-2 text-sm font-medium"><span class="w-2 h-2 bg-emerald-500 rounded-full"></span> Supabase</span>
+          <span class="inline-flex items-center gap-2 text-sm font-medium"><i class="fa-brands fa-react"></i> Next.js 14</span>
+          <span class="inline-flex items-center gap-2 text-sm font-medium"><span class="w-3 h-3 bg-sky-500 rounded-sm flex items-center justify-center text-white text-[8px] font-bold">TS</span> TypeScript</span>
+          <span class="inline-flex items-center gap-2 text-sm font-medium"><i class="fa-brands fa-css3 text-sky-500"></i> Tailwind CSS</span>
+          <span class="ml-auto inline-flex items-center gap-2 text-xs font-semibold px-3 py-1.5 rounded-full bg-black text-white"><i class="fa-solid fa-triangle-exclamation"></i> Deployed on Vercel • supabase-ready</span>
+          <button onclick="openArchitecture()" class="text-sm font-semibold text-[#E65100] hover:underline">View schema →</button>
+        </div>
+      </section>
+
+      <!-- STUDENTS -->
+      <section id="sec-students" class="hidden space-y-4">
+        <div class="flex flex-wrap gap-3 items-center justify-between">
+          <div>
+            <h2 class="font-display text-2xl font-bold">Student Management</h2>
+            <p class="text-sm text-slate-500">Manage all student records, admissions and profiles</p>
+          </div>
+          <button onclick="openModal('student')" class="bg-[#E65100] hover:bg-[#BF360C] text-white px-5 py-2.5 rounded-full font-semibold text-sm"><i class="fa-solid fa-plus mr-2"></i>Add New Student</button>
+        </div>
+        <div class="bg-white rounded-2xl border border-slate-200 p-4 flex flex-wrap gap-3 items-center">
+          <div class="relative flex-1 min-w-[220px]">
+            <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"></i>
+            <input id="studentSearch" oninput="renderStudents()" placeholder="Search by name, ID or class..." class="w-full pl-9 pr-3 py-2.5 rounded-full border border-slate-200 bg-slate-50 focus:bg-white outline-none text-sm">
+          </div>
+          <select id="classFilter" onchange="renderStudents()" class="px-4 py-2.5 rounded-full border border-slate-200 bg-white text-sm">
+            <option value="">All Classes</option>
+            <option>Creche</option><option>Nursery 1</option><option>Nursery 2</option><option>KG 1</option><option>KG 2</option><option>Basic 1</option><option>Basic 2</option><option>Basic 3</option><option>Basic 4</option><option>Basic 5</option><option>Basic 6</option><option>JHS 1</option><option>JHS 2</option><option>JHS 3</option>
+          </select>
+          <select id="feeFilter" onchange="renderStudents()" class="px-4 py-2.5 rounded-full border border-slate-200 bg-white text-sm">
+            <option value="">All Fees Status</option><option>Paid</option><option>Partial</option><option>Due</option>
+          </select>
+          <span id="studentCount" class="text-sm font-medium text-slate-600 ml-auto"></span>
+        </div>
+        <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden">
+          <div class="overflow-x-auto">
+            <table class="w-full text-sm">
+              <thead class="bg-slate-50 text-xs text-slate-500"><tr><th class="text-left px-5 py-3 font-semibold">Student</th><th class="text-left px-3 py-3 font-semibold">ID & Class</th><th class="text-left px-3 py-3 font-semibold">Parent / Guardian</th><th class="text-left px-3 py-3 font-semibold">Fees</th><th class="text-left px-3 py-3 font-semibold">Status</th><th class="text-right px-5 py-3 font-semibold">Actions</th></tr></thead>
+              <tbody id="studentTable" class="divide-y divide-slate-100"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- TEACHERS -->
+      <section id="sec-teachers" class="hidden space-y-4">
+        <div class="flex flex-wrap gap-3 items-center justify-between">
+          <div><h2 class="font-display text-2xl font-bold">Teachers & Staff</h2><p class="text-sm text-slate-500">Manage teaching and non-teaching staff profiles, subjects and payroll</p></div>
+          <button onclick="openModal('teacher')" class="bg-[#E65100] text-white px-5 py-2.5 rounded-full font-semibold text-sm"><i class="fa-solid fa-plus mr-2"></i>Add Staff</button>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4" id="teacherGrid"></div>
+        <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden">
+          <div class="p-4 font-semibold border-b border-slate-100">Staff Directory</div>
+          <div class="overflow-x-auto">
+            <table class="w-full text-sm">
+              <thead class="bg-slate-50 text-xs text-slate-500"><tr><th class="text-left px-5 py-3">Name</th><th class="text-left px-3 py-3">Role</th><th class="text-left px-3 py-3">Subject / Dept</th><th class="text-left px-3 py-3">Phone</th><th class="text-left px-3 py-3">Status</th><th class="text-right px-5 py-3">Action</th></tr></thead>
+              <tbody id="teacherTable" class="divide-y divide-slate-100"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- CLASSES -->
+      <section id="sec-classes" class="hidden space-y-4">
+        <div class="flex flex-wrap items-center justify-between gap-3">
+          <div><h2 class="font-display text-2xl font-bold">Classes & Subjects</h2><p class="text-sm text-slate-500">Organize classes, sections, subjects and class teachers</p></div>
+          <button onclick="toast('New class creation connected to Supabase: classes table')" class="bg-[#0F172A] text-white px-5 py-2.5 rounded-full text-sm font-semibold"><i class="fa-solid fa-plus mr-2"></i>Add Class</button>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4" id="classGrid"></div>
+        <div class="grid grid-cols-1 xl:grid-cols-2 gap-4">
+          <div class="bg-white rounded-2xl border border-slate-200 p-5">
+            <h3 class="font-semibold mb-4">Subjects Offered</h3>
+            <div id="subjectList" class="grid grid-cols-1 sm:grid-cols-2 gap-3"></div>
+          </div>
+          <div class="bg-white rounded-2xl border border-slate-200 p-5">
+            <h3 class="font-semibold mb-4">Class Timetable (JHS 1 — Sample)</h3>
+            <div class="overflow-x-auto">
+              <table class="w-full text-xs">
+                <thead><tr class="text-slate-500"><th class="text-left py-2">Time</th><th>Mon</th><th>Tue</th><th>Wed</th><th>Thu</th><th>Fri</th></tr></thead>
+                <tbody class="divide-y divide-slate-100">
+                  <tr><td class="py-2 font-medium">8:00-9:00</td><td class="text-center"><span class="px-2 py-1 rounded-full bg-orange-50 text-[#E65100] font-medium">Maths</span></td><td class="text-center">English</td><td class="text-center">Science</td><td class="text-center">Maths</td><td class="text-center">RME</td></tr>
+                  <tr><td class="py-2 font-medium">9:00-10:00</td><td class="text-center">English</td><td class="text-center">Maths</td><td class="text-center">ICT</td><td class="text-center">OWOP</td><td class="text-center">Creative Arts</td></tr>
+                  <tr><td class="py-2 font-medium">10:30-11:30</td><td class="text-center">Science</td><td class="text-center">OWOP</td><td class="text-center">English</td><td class="text-center">French</td><td class="text-center">Maths</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ATTENDANCE -->
+      <section id="sec-attendance" class="hidden space-y-4">
+        <div class="flex flex-wrap items-center justify-between gap-3">
+          <div><h2 class="font-display text-2xl font-bold">Attendance Management</h2><p class="text-sm text-slate-500">Mark daily attendance and track trends — linked to Supabase attendance table</p></div>
+          <div class="flex items-center gap-2">
+            <input type="date" id="attDate" value="2024-04-12" class="px-4 py-2.5 rounded-full border border-slate-200 text-sm">
+            <select id="attClass" onchange="renderAttendance()" class="px-4 py-2.5 rounded-full border border-slate-200 text-sm"><option>Basic 4</option><option>Basic 5</option><option>JHS 1</option><option>KG 2</option></select>
+            <button onclick="saveAttendance()" class="bg-[#E65100] text-white px-5 py-2.5 rounded-full text-sm font-semibold">Save Attendance</button>
+          </div>
+        </div>
+        <div class="grid grid-cols-3 gap-3">
+          <div class="bg-white rounded-2xl border border-slate-200 p-4 text-center"><p class="text-2xl font-bold text-emerald-600" id="attPresent">0</p><p class="text-xs text-slate-500">Present</p></div>
+          <div class="bg-white rounded-2xl border border-slate-200 p-4 text-center"><p class="text-2xl font-bold text-amber-600" id="attLate">0</p><p class="text-xs text-slate-500">Late</p></div>
+          <div class="bg-white rounded-2xl border border-slate-200 p-4 text-center"><p class="text-2xl font-bold text-red-600" id="attAbsent">0</p><p class="text-xs text-slate-500">Absent</p></div>
+        </div>
+        <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden">
+          <div class="p-4 flex items-center justify-between border-b border-slate-100">
+            <h3 class="font-semibold">Mark Attendance — <span id="attClassLabel">Basic 4</span></h3>
+            <div class="flex gap-2 text-xs">
+              <button onclick="markAll('Present')" class="px-3 py-1.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 font-semibold">All Present</button>
+              <button onclick="markAll('Absent')" class="px-3 py-1.5 rounded-full bg-red-50 text-red-700 border border-red-200 font-semibold">All Absent</button>
+            </div>
+          </div>
+          <div class="overflow-x-auto">
+            <table class="w-full text-sm">
+              <thead class="bg-slate-50 text-xs text-slate-500"><tr><th class="text-left px-5 py-3">Student</th><th class="text-center px-3 py-3">Present</th><th class="text-center px-3 py-3">Absent</th><th class="text-center px-3 py-3">Late</th><th class="text-left px-3 py-3">Remark</th></tr></thead>
+              <tbody id="attendanceBody" class="divide-y divide-slate-100"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- FEES -->
+      <section id="sec-fees" class="hidden space-y-4">
+        <div class="flex flex-wrap items-center justify-between gap-3">
+          <div><h2 class="font-display text-2xl font-bold">Fees & Payments</h2><p class="text-sm text-slate-500">Track fee invoices, payments and outstanding balances (GHS)</p></div>
+          <button onclick="openModal('payment')" class="bg-[#E65100] text-white px-5 py-2.5 rounded-full text-sm font-semibold"><i class="fa-solid fa-plus mr-2"></i>Record Payment</button>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          <div class="bg-white rounded-2xl border border-slate-200 p-5"><p class="text-sm text-slate-500">Total Billed (Term 2)</p><p class="text-2xl font-bold">GH₵ 156,000</p><p class="text-xs text-slate-500">342 students × GH₵ 850 avg</p></div>
+          <div class="bg-white rounded-2xl border border-slate-200 p-5"><p class="text-sm text-slate-500">Collected</p><p class="text-2xl font-bold text-emerald-600">GH₵ 128,430</p><div class="h-1.5 bg-slate-100 rounded-full mt-2"><div class="h-full bg-emerald-500 rounded-full" style="width:82%"></div></div></div>
+          <div class="bg-white rounded-2xl border border-slate-200 p-5"><p class="text-sm text-slate-500">Outstanding</p><p class="text-2xl font-bold text-red-600">GH₵ 27,570</p><p class="text-xs text-red-600 font-medium">56 students have balances</p></div>
+        </div>
+        <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden">
+          <div class="p-4 flex flex-wrap gap-3 items-center border-b border-slate-100">
+            <div class="relative flex-1 min-w-[200px]"><i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm"></i><input id="feeSearch" oninput="renderFees()" placeholder="Search student or receipt..." class="w-full pl-9 pr-3 py-2.5 rounded-full border border-slate-200 bg-slate-50 text-sm"></div>
+            <select id="feeStatusFilter" onchange="renderFees()" class="px-4 py-2.5 rounded-full border border-slate-200 text-sm"><option value="">All Status</option><option>Paid</option><option>Partial</option><option>Due</option></select>
+          </div>
+          <div class="overflow-x-auto">
+            <table class="w-full text-sm">
+              <thead class="bg-slate-50 text-xs text-slate-500"><tr><th class="text-left px-5 py-3">Student</th><th class="text-left px-3 py-3">Class</th><th class="text-left px-3 py-3">Total Fees</th><th class="text-left px-3 py-3">Paid</th><th class="text-left px-3 py-3">Balance</th><th class="text-left px-3 py-3">Status</th><th class="text-right px-5 py-3">Action</th></tr></thead>
+              <tbody id="feeTable" class="divide-y divide-slate-100"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- EXPENSES -->
+      <section id="sec-expenses" class="hidden space-y-4">
+        <div class="flex flex-wrap items-center justify-between gap-3">
+          <div><h2 class="font-display text-2xl font-bold">Expenses</h2><p class="text-sm text-slate-500">Record and categorize school expenditures</p></div>
+          <button onclick="openModal('expense')" class="bg-[#0F172A] text-white px-5 py-2.5 rounded-full text-sm font-semibold"><i class="fa-solid fa-plus mr-2"></i>Add Expense</button>
+        </div>
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
+          <div class="bg-white rounded-2xl border border-slate-200 p-5 lg:col-span-2">
+            <h3 class="font-semibold mb-4">Expenses — April 2024</h3>
+            <div class="overflow-x-auto">
+              <table class="w-full text-sm">
+                <thead class="text-xs text-slate-500 bg-slate-50"><tr><th class="text-left px-3 py-2">Date</th><th class="text-left px-3 py-2">Category</th><th class="text-left px-3 py-2">Description</th><th class="text-right px-3 py-2">Amount</th><th class="text-right px-3 py-2"></th></tr></thead>
+                <tbody id="expenseTable" class="divide-y divide-slate-100"></tbody>
+              </table>
+            </div>
+          </div>
+          <div class="bg-white rounded-2xl border border-slate-200 p-5">
+            <h3 class="font-semibold">Expense Breakdown</h3>
+            <div class="h-[220px] mt-2"><canvas id="expenseChart"></canvas></div>
+            <div class="mt-4 space-y-2 text-sm" id="expenseSummary"></div>
+            <div class="mt-4 p-3 rounded-xl bg-slate-50 border border-slate-200 text-sm">
+              <p class="font-semibold">Total Spent (April)</p><p class="text-xl font-bold">GH₵ <span id="totalExpense">0</span></p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- EXAMS -->
+      <section id="sec-exams" class="hidden space-y-4">
+        <div class="flex flex-wrap items-center justify-between gap-3">
+          <div><h2 class="font-display text-2xl font-bold">Exams, Results & Report Cards</h2><p class="text-sm text-slate-500">Mid-Term • End of Term • Mock Exams</p></div>
+          <div class="flex gap-2">
+            <button onclick="generateReportCards()" class="bg-[#E65100] text-white px-5 py-2.5 rounded-full text-sm font-semibold"><i class="fa-solid fa-print mr-2"></i>Generate Report Cards</button>
+          </div>
+        </div>
+        <div class="bg-white rounded-2xl border border-slate-200 p-4 flex flex-wrap gap-3">
+          <select id="examClass" onchange="renderExams()" class="px-4 py-2.5 rounded-full border border-slate-200 bg-white text-sm"><option>Basic 4</option><option>Basic 6</option><option>JHS 2</option></select>
+          <select id="examTerm" onchange="renderExams()" class="px-4 py-2.5 rounded-full border border-slate-200 bg-white text-sm"><option>Term 2 - 2024 (Current)</option><option>Term 1 - 2024</option></select>
+          <span class="ml-auto text-sm bg-amber-50 text-amber-700 px-3 py-2 rounded-full border border-amber-200 font-medium">Grading: A(80-100) B(65-79) C(50-64) D(35-49) E(0-34)</span>
+        </div>
+        <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden">
+          <div class="overflow-x-auto">
+            <table class="w-full text-sm">
+              <thead class="bg-slate-900 text-white text-xs"><tr><th class="text-left px-4 py-3">Student</th><th class="text-center px-2 py-3">Maths</th><th class="text-center px-2 py-3">English</th><th class="text-center px-2 py-3">Science</th><th class="text-center px-2 py-3">OWOP</th><th class="text-center px-2 py-3">Total</th><th class="text-center px-2 py-3">Avg</th><th class="text-center px-2 py-3">Grade</th><th class="text-center px-2 py-3">Position</th><th class="text-right px-4 py-3">Card</th></tr></thead>
+              <tbody id="examTable" class="divide-y divide-slate-100"></tbody>
+            </table>
+          </div>
+        </div>
+        <!-- Report Card Preview -->
+        <div id="reportCard" class="hidden bg-white rounded-2xl border-2 border-slate-900 overflow-hidden no-print">
+          <div class="bg-[#0F172A] text-white p-6 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+              <div class="w-12 h-12 rounded-xl bg-[#E65100] flex items-center justify-center"><i class="fa-solid fa-sun"></i></div>
+              <div><p class="font-display font-bold">MORNING DEW MONTESSORI SCHOOL</p><p class="text-xs text-slate-300">Effiduase, Ashanti Region • Tel: +233 24 123 4567 • Motto: Knowledge Lights the Path</p></div>
+            </div>
+            <div class="text-right text-xs"> <p class="font-bold text-orange-400">TERMINAL REPORT</p><p>2024/2025 — Term 2</p></div>
+          </div>
+          <div class="p-6" id="reportCardContent"></div>
+        </div>
+      </section>
+
+      <!-- PARENTS -->
+      <section id="sec-parents" class="hidden space-y-4">
+        <div class="flex flex-wrap items-center justify-between gap-3">
+          <div><h2 class="font-display text-2xl font-bold">Parent / Guardian Records</h2><p class="text-sm text-slate-500">Linked to students • Contact, address & communication log</p></div>
+          <div class="relative"><i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm"></i><input id="parentSearch" oninput="renderParents()" placeholder="Search parent..." class="pl-9 pr-4 py-2.5 rounded-full border border-slate-200 text-sm w-[260px]"></div>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4" id="parentGrid"></div>
+      </section>
+
+      <!-- NOTICES -->
+      <section id="sec-notices" class="hidden space-y-4">
+        <div class="flex flex-wrap items-center justify-between gap-3">
+          <div><h2 class="font-display text-2xl font-bold">Notices & Announcements</h2><p class="text-sm text-slate-500">Broadcast to parents, students and staff • SMS & portal</p></div>
+          <button onclick="openModal('notice')" class="bg-[#E65100] text-white px-5 py-2.5 rounded-full text-sm font-semibold"><i class="fa-solid fa-plus mr-2"></i>Post Notice</button>
+        </div>
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
+          <div class="lg:col-span-2 space-y-3" id="noticeList"></div>
+          <div class="bg-white rounded-2xl border border-slate-200 p-5 h-fit">
+            <h3 class="font-semibold">Publish Notice</h3>
+            <p class="text-xs text-slate-500 mb-4">Notices are stored in Supabase <code class="bg-slate-100 px-1.5 py-0.5 rounded">notices</code> table with RLS</p>
+            <form onsubmit="createNotice(event)" class="space-y-3">
+              <input name="title" required placeholder="Title e.g. PTA Meeting" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-sm">
+              <textarea name="content" required placeholder="Message..." rows="4" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-sm"></textarea>
+              <select name="audience" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-sm"><option>All (Parents & Staff)</option><option>Parents Only</option><option>Staff Only</option><option>Specific Class</option></select>
+              <select name="priority" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-sm"><option value="normal">Normal Priority</option><option value="high">High Priority 🔴</option><option value="urgent">Urgent 🚨</option></select>
+              <button class="w-full bg-[#0F172A] text-white py-2.5 rounded-xl font-semibold text-sm">Publish Notice</button>
+            </form>
+          </div>
+        </div>
+      </section>
+
+      <!-- REPORTS -->
+      <section id="sec-reports" class="hidden space-y-4">
+        <div><h2 class="font-display text-2xl font-bold">Reports & Analytics</h2><p class="text-sm text-slate-500">Academic, financial and operational insights</p></div>
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
+          <div class="bg-white rounded-2xl border border-slate-200 p-5"><h3 class="font-semibold text-sm">Enrollment by Class</h3><div class="h-[220px] mt-3"><canvas id="enrollChart"></canvas></div></div>
+          <div class="bg-white rounded-2xl border border-slate-200 p-5"><h3 class="font-semibold text-sm">Revenue vs Expenses (6 Months)</h3><div class="h-[220px] mt-3"><canvas id="revenueChart"></canvas></div></div>
+          <div class="bg-white rounded-2xl border border-slate-200 p-5"><h3 class="font-semibold text-sm">Performance Overview</h3><div class="h-[220px] mt-3"><canvas id="performanceChart"></canvas></div></div>
+        </div>
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
+          <div class="bg-white rounded-2xl border border-slate-200 p-5">
+            <h3 class="font-semibold mb-3">Quick Exports</h3>
+            <div class="space-y-2">
+              <button onclick="toast('Exporting Students CSV...')" class="w-full flex items-center justify-between p-3 rounded-xl border border-slate-200 hover:bg-slate-50 text-sm font-medium"><span><i class="fa-solid fa-file-csv mr-2 text-emerald-600"></i> Students List (CSV)</span><i class="fa-solid fa-download text-slate-400"></i></button>
+              <button onclick="toast('Generating Fees PDF...')" class="w-full flex items-center justify-between p-3 rounded-xl border border-slate-200 hover:bg-slate-50 text-sm font-medium"><span><i class="fa-solid fa-file-pdf mr-2 text-red-600"></i> Fees Statement (PDF)</span><i class="fa-solid fa-download text-slate-400"></i></button>
+              <button onclick="toast('Attendance PDF ready')" class="w-full flex items-center justify-between p-3 rounded-xl border border-slate-200 hover:bg-slate-50 text-sm font-medium"><span><i class="fa-solid fa-clipboard-check mr-2 text-blue-600"></i> Attendance Register (PDF)</span><i class="fa-solid fa-download text-slate-400"></i></button>
+            </div>
+          </div>
+          <div class="lg:col-span-2 bg-[#0F172A] rounded-2xl p-6 text-white">
+            <h3 class="font-semibold">Supabase + Vercel Deployment Pipeline</h3>
+            <p class="text-sm text-slate-400 mt-1">This dashboard is built as Next.js 14 (App Router) + TypeScript + Tailwind CSS, with Supabase as BaaS.</p>
+            <div class="mt-4 grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs font-mono">
+              <div class="bg-white/5 border border-white/10 rounded-xl p-3"><p class="text-orange-400 font-bold">.env.local</p><p class="mt-1 text-slate-300">NEXT_PUBLIC_SUPABASE_URL=<br>NEXT_PUBLIC_SUPABASE_ANON_KEY=<br>SUPABASE_SERVICE_ROLE_KEY=</p></div>
+              <div class="bg-white/5 border border-white/10 rounded-xl p-3"><p class="text-emerald-400 font-bold">supabase/schema.sql</p><p class="mt-1 text-slate-300">students, staff, classes,<br>attendance, fees, expenses,<br>exams, notices, profiles, roles</p></div>
+              <div class="bg-white/5 border border-white/10 rounded-xl p-3"><p class="text-sky-400 font-bold">vercel.json</p><p class="mt-1 text-slate-300">Framework: Next.js<br>Build: next build<br>Env: Supabase keys</p></div>
+            </div>
+            <button onclick="openArchitecture()" class="mt-4 px-4 py-2 rounded-full bg-[#E65100] text-white text-sm font-semibold">View Full Architecture</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ROLES -->
+      <section id="sec-roles" class="hidden space-y-4">
+        <div><h2 class="font-display text-2xl font-bold">User Roles & Permissions</h2><p class="text-sm text-slate-500">Role-based access control — synced to Supabase Auth + RLS policies</p></div>
+        <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden">
+          <div class="overflow-x-auto">
+            <table class="w-full text-sm">
+              <thead class="bg-slate-50 text-xs text-slate-500"><tr><th class="text-left px-5 py-3">Role</th><th class="text-center px-3 py-3">Dashboard</th><th class="text-center px-3 py-3">Students</th><th class="text-center px-3 py-3">Finance</th><th class="text-center px-3 py-3">Attendance</th><th class="text-center px-3 py-3">Exams</th><th class="text-center px-3 py-3">Notices</th><th class="text-center px-3 py-3">Settings</th></tr></thead>
+              <tbody id="rolesTable" class="divide-y divide-slate-100"></tbody>
+            </table>
+          </div>
+          <div class="p-4 bg-amber-50 border-t border-amber-200 text-sm text-amber-800 flex items-start gap-2"><i class="fa-solid fa-shield-halved mt-0.5"></i><span><b>RLS Enabled:</b> Supabase Row Level Security ensures parents see only their ward's data, teachers see assigned classes, and only Admin/Bursar can mutate finance tables.</span></div>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div class="bg-white rounded-2xl border border-slate-200 p-5"><h4 class="font-semibold text-sm flex items-center gap-2"><span class="w-2 h-2 bg-emerald-500 rounded-full"></span> Admin (Headmaster)</h4><p class="text-xs text-slate-500 mt-1">Full access to all modules including finance, roles and Supabase dashboard.</p></div>
+          <div class="bg-white rounded-2xl border border-slate-200 p-5"><h4 class="font-semibold text-sm flex items-center gap-2"><span class="w-2 h-2 bg-blue-500 rounded-full"></span> Teacher</h4><p class="text-xs text-slate-500 mt-1">Can mark attendance, enter exam scores for assigned subjects and view class reports.</p></div>
+          <div class="bg-white rounded-2xl border border-slate-200 p-5"><h4 class="font-semibold text-sm flex items-center gap-2"><span class="w-2 h-2 bg-orange-500 rounded-full"></span> Parent</h4><p class="text-xs text-slate-500 mt-1">Portal access to fees, attendance, results and notices via Supabase Auth (magic link).</p></div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+</div>
+
+<!-- MODALS -->
+<div id="modal-student" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm hidden items-center justify-center p-4 z-50">
+  <div class="bg-white rounded-2xl w-full max-w-[560px] overflow-hidden shadow-2xl">
+    <div class="px-6 py-4 border-b border-slate-200 flex items-center justify-between">
+      <h3 class="font-semibold">Add New Student</h3>
+      <button onclick="closeModal('student')" class="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <form onsubmit="addStudent(event)" class="p-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
+      <div class="sm:col-span-2 flex items-center gap-3 p-3 rounded-xl bg-orange-50 border border-orange-200 text-sm text-orange-800"><i class="fa-solid fa-database"></i> Will insert into Supabase table <code class="bg-white px-1.5 py-0.5 rounded border">students</code></div>
+      <div><label class="text-xs font-semibold text-slate-600">Full Name</label><input name="name" required placeholder="e.g. Ama Serwaa" class="mt-1 w-full px-3 py-2.5 rounded-xl border border-slate-200 text-sm"></div>
+      <div><label class="text-xs font-semibold text-slate-600">Admission ID</label><input name="id" required placeholder="MDM..." class="mt-1 w-full px-3 py-2.5 rounded-xl border border-slate-200 text-sm"></div>
+      <div><label class="text-xs font-semibold text-slate-600">Class</label><select name="class" class="mt-1 w-full px-3 py-2.5 rounded-xl border border-slate-200 text-sm"><option>Creche</option><option>KG 1</option><option>KG 2</option><option>Basic 1</option><option>Basic 2</option><option>Basic 3</option><option selected>Basic 4</option><option>Basic 5</option><option>Basic 6</option><option>JHS 1</option><option>JHS 2</option><option>JHS 3</option></select></div>
+      <div><label class="text-xs font-semibold text-slate-600">Gender</label><select name="gender" class="mt-1 w-full px-3 py-2.5 rounded-xl border border-slate-200 text-sm"><option>Female</option><option>Male</option></select></div>
+      <div><label class="text-xs font-semibold text-slate-600">Parent / Guardian</label><input name="parent" required placeholder="Parent name" class="mt-1 w-full px-3 py-2.5 rounded-xl border border-slate-200 text-sm"></div>
+      <div><label class="text-xs font-semibold text-slate-600">Phone</label><input name="phone" placeholder="+233..." class="mt-1 w-full px-3 py-2.5 rounded-xl border border-slate-200 text-sm"></div>
+      <div class="sm:col-span-2 flex gap-3 mt-2">
+        <button type="button" onclick="closeModal('student')" class="flex-1 py-2.5 rounded-full border border-slate-200 font-semibold text-sm">Cancel</button>
+        <button class="flex-1 py-2.5 rounded-full bg-[#E65100] text-white font-semibold text-sm">Save Student</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div id="modal-teacher" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm hidden items-center justify-center p-4 z-50">
+  <div class="bg-white rounded-2xl w-full max-w-[520px] overflow-hidden shadow-2xl">
+    <div class="px-6 py-4 border-b border-slate-200 flex items-center justify-between"><h3 class="font-semibold">Add Staff Member</h3><button onclick="closeModal('teacher')" class="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center"><i class="fa-solid fa-xmark"></i></button></div>
+    <form onsubmit="addTeacher(event)" class="p-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
+      <div><label class="text-xs font-semibold">Full Name</label><input name="name" required class="mt-1 w-full px-3 py-2.5 rounded-xl border border-slate-200 text-sm"></div>
+      <div><label class="text-xs font-semibold">Staff ID</label><input name="id" required placeholder="TCH..." class="mt-1 w-full px-3 py-2.5 rounded-xl border border-slate-200 text-sm"></div>
+      <div><label class="text-xs font-semibold">Role</label><select name="role" class="mt-1 w-full px-3 py-2.5 rounded-xl border border-slate-200 text-sm"><option>Class Teacher</option><option>Subject Teacher</option><option>Head Teacher</option><option>Administrator</option><option>Accountant</option></select></div>
+      <div><label class="text-xs font-semibold">Subject / Dept</label><input name="subject" placeholder="Mathematics" class="mt-1 w-full px-3 py-2.5 rounded-xl border border-slate-200 text-sm"></div>
+      <div class="sm:col-span-2"><label class="text-xs font-semibold">Phone</label><input name="phone" class="mt-1 w-full px-3 py-2.5 rounded-xl border border-slate-200 text-sm"></div>
+      <div class="sm:col-span-2 flex gap-3 mt-2"><button type="button" onclick="closeModal('teacher')" class="flex-1 py-2.5 rounded-full border border-slate-200 font-semibold text-sm">Cancel</button><button class="flex-1 py-2.5 rounded-full bg-[#E65100] text-white font-semibold text-sm">Save Staff</button></div>
+    </form>
+  </div>
+</div>
+
+<div id="modal-payment" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm hidden items-center justify-center p-4 z-50">
+  <div class="bg-white rounded-2xl w-full max-w-[480px] overflow-hidden shadow-2xl">
+    <div class="px-6 py-4 border-b border-slate-200 flex items-center justify-between"><h3 class="font-semibold">Record Fee Payment</h3><button onclick="closeModal('payment')" class="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center"><i class="fa-solid fa-xmark"></i></button></div>
+    <form onsubmit="recordPayment(event)" class="p-6 space-y-4">
+      <div><label class="text-xs font-semibold">Student</label><select id="payStudent" class="mt-1 w-full px-3 py-2.5 rounded-xl border border-slate-200 text-sm"></select></div>
+      <div class="grid grid-cols-2 gap-3"><div><label class="text-xs font-semibold">Amount (GHS)</label><input name="amount" type="number" required placeholder="500" class="mt-1 w-full px-3 py-2.5 rounded-xl border border-slate-200 text-sm"></div><div><label class="text-xs font-semibold">Method</label><select name="method" class="mt-1 w-full px-3 py-2.5 rounded-xl border border-slate-200 text-sm"><option>Cash</option><option>Mobile Money</option><option>Bank Transfer</option></select></div></div>
+      <button class="w-full py-2.5 rounded-full bg-[#E65100] text-white font-semibold text-sm">Confirm Payment</button>
+    </form>
+  </div>
+</div>
+
+<div id="modal-expense" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm hidden items-center justify-center p-4 z-50">
+  <div class="bg-white rounded-2xl w-full max-w-[480px] overflow-hidden shadow-2xl">
+    <div class="px-6 py-4 border-b border-slate-200 flex items-center justify-between"><h3 class="font-semibold">Add Expense</h3><button onclick="closeModal('expense')" class="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center"><i class="fa-solid fa-xmark"></i></button></div>
+    <form onsubmit="addExpense(event)" class="p-6 space-y-4">
+      <div class="grid grid-cols-2 gap-3"><div><label class="text-xs font-semibold">Category</label><select name="category" class="mt-1 w-full px-3 py-2.5 rounded-xl border border-slate-200 text-sm"><option>Teaching Materials</option><option>Utilities</option><option>Maintenance</option><option>Transport</option><option>Salaries</option><option>Events</option></select></div><div><label class="text-xs font-semibold">Amount (GHS)</label><input name="amount" type="number" required class="mt-1 w-full px-3 py-2.5 rounded-xl border border-slate-200 text-sm"></div></div>
+      <div><label class="text-xs font-semibold">Description</label><input name="desc" required placeholder="e.g. Electricity bill April" class="mt-1 w-full px-3 py-2.5 rounded-xl border border-slate-200 text-sm"></div>
+      <button class="w-full py-2.5 rounded-full bg-[#0F172A] text-white font-semibold text-sm">Save Expense</button>
+    </form>
+  </div>
+</div>
+
+<div id="modal-notice" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm hidden items-center justify-center p-4 z-50">
+  <div class="bg-white rounded-2xl w-full max-w-[520px] overflow-hidden shadow-2xl">
+    <div class="px-6 py-4 border-b border-slate-200 flex items-center justify-between"><h3 class="font-semibold">Post Notice</h3><button onclick="closeModal('notice')" class="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center"><i class="fa-solid fa-xmark"></i></button></div>
+    <form onsubmit="createNotice(event)" class="p-6 space-y-3">
+      <input name="title" required placeholder="Notice title" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-sm">
+      <textarea name="content" required rows="4" placeholder="Write message..." class="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-sm"></textarea>
+      <div class="grid grid-cols-2 gap-3"><select name="audience" class="px-4 py-2.5 rounded-xl border border-slate-200 text-sm"><option>All</option><option>Parents</option><option>Staff</option></select><select name="priority" class="px-4 py-2.5 rounded-xl border border-slate-200 text-sm"><option value="normal">Normal</option><option value="high">High</option><option value="urgent">Urgent</option></select></div>
+      <button class="w-full py-2.5 rounded-full bg-[#E65100] text-white font-semibold text-sm">Publish</button>
+    </form>
+  </div>
+</div>
+
+<div id="modal-arch" class="fixed inset-0 bg-slate-900/70 backdrop-blur-sm hidden items-center justify-center p-4 z-50 overflow-y-auto">
+  <div class="bg-white rounded-2xl w-full max-w-[900px] overflow-hidden shadow-2xl my-8">
+    <div class="px-6 py-4 border-b border-slate-200 flex items-center justify-between bg-slate-50">
+      <div><h3 class="font-display font-bold">Supabase-Ready Architecture</h3><p class="text-xs text-slate-500">Next.js 14 • TypeScript • Tailwind CSS • Deployed on Vercel</p></div>
+      <button onclick="closeModal('arch')" class="w-8 h-8 rounded-full bg-white border border-slate-200 flex items-center justify-center"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="p-6 grid grid-cols-1 lg:grid-cols-2 gap-6 text-sm">
+      <div class="space-y-4">
+        <div>
+          <h4 class="font-semibold flex items-center gap-2"><i class="fa-solid fa-database text-emerald-600"></i> Supabase Schema (PostgreSQL)</h4>
+          <pre class="mt-2 bg-slate-900 text-slate-100 p-4 rounded-xl text-xs overflow-x-auto leading-relaxed">-- students
+create table students (
+  id text primary key, -- MDM001
+  name text not null,
+  class text, gender text,
+  parent_name text, phone text,
+  fees_status text default 'Due',
+  created_at timestamp default now()
+);
+-- attendance
+create table attendance (
+  id uuid primary key default gen_random_uuid(),
+  student_id text references students(id),
+  date date, status text, -- Present/Absent/Late
+  class text
+);
+-- fees
+create table fees (
+  id uuid primary key default gen_random_uuid(),
+  student_id text references students(id),
+  amount int, paid int, balance int,
+  term text, status text
+);
+-- + staff, classes, subjects, exams,
+--   expenses, notices, profiles, roles
+-- RLS enabled on all tables</pre>
+        </div>
+        <div class="p-4 rounded-xl bg-orange-50 border border-orange-200">
+          <p class="font-semibold text-orange-800">Vercel Deployment</p>
+          <p class="text-xs text-orange-700 mt-1">Connect GitHub → Import Next.js project → Add Supabase env vars → Deploy. Automatic CI on push to main.</p>
+          <code class="mt-2 block bg-white border border-orange-200 px-3 py-2 rounded-lg text-xs">vercel --prod</code>
+        </div>
+      </div>
+      <div class="space-y-4">
+        <div>
+          <h4 class="font-semibold flex items-center gap-2"><i class="fa-brands fa-react text-sky-600"></i> Next.js 14 Code</h4>
+          <pre class="mt-2 bg-slate-900 text-slate-100 p-4 rounded-xl text-xs overflow-x-auto leading-relaxed">// lib/supabase.ts
+import { createClient } from '@supabase/supabase-js'
+export const supabase = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+)
+
+// app/students/page.tsx
+export default async function Students(){
+  const { data } = await supabase
+    .from('students').select('*')
+  return &lt;StudentTable data={data} /&gt;
+}
+
+// Real-time attendance
+supabase.channel('attendance')
+ .on('postgres_changes',
+  { event:'*', schema:'public', table:'attendance'},
+  payload => console.log(payload)
+ ).subscribe()</pre>
+        </div>
+        <div class="grid grid-cols-2 gap-3">
+          <div class="p-3 rounded-xl border border-slate-200 bg-slate-50"><p class="font-semibold text-xs">Tailwind Theme</p><code class="text-xs">primary: #E65100<br>sidebar: #0F172A<br>content: #FFFFFF</code></div>
+          <div class="p-3 rounded-xl border border-slate-200 bg-slate-50"><p class="font-semibold text-xs">Roles (RLS)</p><p class="text-xs text-slate-600">admin • teacher • bursar • parent • student</p></div>
+        </div>
+        <button onclick="toast('Schema copied! Ready to paste into Supabase SQL editor')" class="w-full py-2.5 rounded-full bg-[#E65100] text-white font-semibold">Copy Schema to Clipboard</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div id="toast" class="fixed bottom-6 right-6 bg-slate-900 text-white px-4 py-3 rounded-xl shadow-2xl hidden items-center gap-3 z-50">
+  <span class="w-8 h-8 rounded-full bg-[#E65100] flex items-center justify-center"><i class="fa-solid fa-check text-sm"></i></span>
+  <div><p id="toastMsg" class="text-sm font-medium leading-none">Success</p><p class="text-xs text-slate-400">Morning Dew System</p></div>
+</div>
+
+<script>
+let students = [
+  {id:'MDM001', name:'Ama Serwaa', class:'Basic 4', gender:'F', age:9, parent:'Kwame Serwaa', phone:'+233 24 111 2233', fees:'Paid', paid:850, balance:0, total:850, status:'Active', avatar:'AS'},
+  {id:'MDM002', name:'Kofi Mensah', class:'Basic 4', gender:'M', age:10, parent:'Abena Mensah', phone:'+233 24 222 3344', fees:'Partial', paid:500, balance:350, total:850, status:'Active', avatar:'KM'},
+  {id:'MDM003', name:'Akosua Owusu', class:'JHS 1', gender:'F', age:13, parent:'Yaw Owusu', phone:'+233 24 333 4455', fees:'Due', paid:0, balance:950, total:950, status:'Active', avatar:'AO'},
+  {id:'MDM004', name:'Kwabena Asare', class:'KG 2', gender:'M', age:5, parent:'Grace Asare', phone:'+233 24 444 5566', fees:'Paid', paid:650, balance:0, total:650, status:'Active', avatar:'KA'},
+  {id:'MDM005', name:'Yaa Boateng', class:'Basic 6', gender:'F', age:11, parent:'Kojo Boateng', phone:'+233 24 555 6677', fees:'Paid', paid:900, balance:0, total:900, status:'Active', avatar:'YB'},
+  {id:'MDM006', name:'Kwesi Appiah', class:'Basic 4', gender:'M', age:9, parent:'Felicia Appiah', phone:'+233 24 666 7788', fees:'Partial', paid:400, balance:450, total:850, status:'Active', avatar:'KA'},
+  {id:'MDM007', name:'Adwoa Darko', class:'Nursery 2', gender:'F', age:4, parent:'Samuel Darko', phone:'+233 24 777 8899', fees:'Paid', paid:600, balance:0, total:600, status:'Active', avatar:'AD'},
+  {id:'MDM008', name:'Emmanuel Osei', class:'JHS 2', gender:'M', age:14, parent:'Linda Osei', phone:'+233 24 888 9900', fees:'Due', paid:200, balance:750, total:950, status:'Active', avatar:'EO'},
+];
+
+let teachers = [
+  {id:'TCH01', name:'Mrs. Grace Owusu', role:'Class Teacher', subject:'Mathematics', class:'JHS 1', phone:'+233 24 123 0001', status:'Active', avatar:'https://i.pravatar.cc/100?img=32'},
+  {id:'TCH02', name:'Mr. Daniel Asante', role:'Subject Teacher', subject:'English', class:'Basic 4', phone:'+233 24 123 0002', status:'Active', avatar:'https://i.pravatar.cc/100?img=15'},
+  {id:'TCH03', name:'Ms. Adwoa Konadu', role:'Head Teacher', subject:'Science', class:'Basic 6', phone:'+233 24 123 0003', status:'Active', avatar:'https://i.pravatar.cc/100?img=26'},
+  {id:'TCH04', name:'Mr. Samuel Bediako', role:'Administrator', subject:'Admin', class:'—', phone:'+233 24 123 0004', status:'On Leave', avatar:'https://i.pravatar.cc/100?img=68'},
+  {id:'TCH05', name:'Mrs. Felicia Ampofo', role:'Accountant', subject:'Finance', class:'—', phone:'+233 24 123 0005', status:'Active', avatar:'https://i.pravatar.cc/100?img=45'},
+];
+
+let classes = [
+  {name:'Creche', students:18, capacity:25, teacher:'Ms. Linda Asare', room:'Block A - 01', color:'bg-pink-500'},
+  {name:'Nursery 1', students:22, capacity:30, teacher:'Mrs. Abena Twum', room:'Block A - 02', color:'bg-amber-500'},
+  {name:'Nursery 2', students:24, capacity:30, teacher:'Mr. Kojo Mensah', room:'Block A - 03', color:'bg-emerald-500'},
+  {name:'KG 1', students:28, capacity:35, teacher:'Ms. Akua Addo', room:'Block B - 01', color:'bg-sky-500'},
+  {name:'KG 2', students:26, capacity:35, teacher:'Mrs. Comfort Osei', room:'Block B - 02', color:'bg-violet-500'},
+  {name:'Basic 4', students:32, capacity:40, teacher:'Mr. Daniel Asante', room:'Block C - 02', color:'bg-[#E65100]'},
+  {name:'Basic 6', students:30, capacity:40, teacher:'Ms. Adwoa Konadu', room:'Block C - 04', color:'bg-blue-600'},
+  {name:'JHS 1', students:29, capacity:35, teacher:'Mrs. Grace Owusu', room:'Block D - 01', color:'bg-slate-800'},
+  {name:'JHS 2', students:27, capacity:35, teacher:'Mr. Emmanuel Frimpong', room:'Block D - 02', color:'bg-teal-600'},
+];
+
+let subjects = [
+  {name:'Mathematics', teacher:'Mrs. Grace Owusu', icon:'fa-calculator', color:'text-[#E65100] bg-orange-50'},
+  {name:'English Language', teacher:'Mr. Daniel Asante', icon:'fa-book-open', color:'text-blue-600 bg-blue-50'},
+  {name:'Integrated Science', teacher:'Ms. Adwoa Konadu', icon:'fa-flask', color:'text-emerald-600 bg-emerald-50'},
+  {name:'Our World Our People', teacher:'Mr. Kofi Yeboah', icon:'fa-earth-africa', color:'text-amber-600 bg-amber-50'},
+  {name:'R.M.E', teacher:'Rev. Isaac Owusu', icon:'fa-hands-praying', color:'text-violet-600 bg-violet-50'},
+  {name:'Creative Arts', teacher:'Ms. Akosua Mingle', icon:'fa-palette', color:'text-pink-600 bg-pink-50'},
+  {name:'Computing (ICT)', teacher:'Mr. Felix Adom', icon:'fa-computer', color:'text-slate-700 bg-slate-100'},
+  {name:'French', teacher:'Mme. Charlotte B.', icon:'fa-language', color:'text-sky-600 bg-sky-50'},
+];
+
+let attendanceState = {};
+students.forEach(s=> attendanceState[s.id]='Present');
+
+let expenses = [
+  {id:1, date:'2024-04-02', category:'Utilities', desc:'Electricity Bill - March', amount:1850},
+  {id:2, date:'2024-04-05', category:'Teaching Materials', desc:'Textbooks & Stationery', amount:3200},
+  {id:3, date:'2024-04-07', category:'Maintenance', desc:'Classroom repairs Block C', amount:950},
+  {id:4, date:'2024-04-09', category:'Salaries', desc:'Support staff advance', amount:5600},
+  {id:5, date:'2024-04-11', category:'Transport', desc:'School bus fuel & service', amount:1200},
+];
+
+let notices = [
+  {title:'📢 PTA Meeting — Term 2', content:'All parents are cordially invited to PTA meeting on Saturday, 20th April 2024 at 9:00 AM in the school hall. Agenda: academic performance & fees.', date:'2024-04-10', audience:'All', priority:'high', author:'Headmaster'},
+  {title:'Mid-Term Examinations Timetable', content:'Mid-term exams begin 15th April. Pupils should come with required materials. Timetable posted on class boards.', date:'2024-04-08', audience:'Parents', priority:'normal', author:'Academics'},
+  {title:'School Fees Reminder', content:'Kindly settle outstanding fees before 22nd April to avoid late penalty. Mobile Money: *170# • Account: Morning Dew Momo', date:'2024-04-05', audience:'Parents', priority:'urgent', author:'Bursar'},
+];
+
+let examResults = [
+  {id:'MDM005', name:'Yaa Boateng', m:88, e:76, s:82, o:79},
+  {id:'MDM002', name:'Kofi Mensah', m:72, e:68, s:74, o:70},
+  {id:'MDM001', name:'Ama Serwaa', m:91, e:84, s:89, o:85},
+  {id:'MDM006', name:'Kwesi Appiah', m:55, e:60, s:48, o:52},
+  {id:'MDM003', name:'Akosua Owusu', m:67, e:71, s:64, o:69},
+];
+
+function toggleSidebar(){
+  const sb=document.getElementById('sidebar'), ov=document.getElementById('overlay');
+  const isHidden=sb.classList.contains('-translate-x-full');
+  if(isHidden){ sb.classList.remove('-translate-x-full'); ov.classList.remove('hidden'); }
+  else{ sb.classList.add('-translate-x-full'); ov.classList.add('hidden'); }
+}
+function showSection(name){
+  document.querySelectorAll('section[id^="sec-"]').forEach(s=>s.classList.add('hidden'));
+  const sec=document.getElementById('sec-'+name);
+  if(sec) sec.classList.remove('hidden');
+  document.querySelectorAll('.nav-item').forEach(el=>{
+    el.classList.remove('bg-[#E65100]','text-white'); el.classList.add('text-slate-300','hover:bg-white/10');
+    if(el.dataset.nav===name){ el.classList.add('bg-[#E65100]','text-white'); el.classList.remove('text-slate-300','hover:bg-white/10'); }
+  });
+  if(window.innerWidth<1024) toggleSidebar();
+  if(name==='reports') setTimeout(initReportsCharts,100);
+  if(name==='expenses') setTimeout(renderExpenseChart,100);
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function openModal(type){
+  const m=document.getElementById('modal-'+type);
+  if(m){ m.classList.remove('hidden'); m.classList.add('flex'); }
+  if(type==='payment') populatePaySelect();
+}
+function closeModal(type){
+  const m=document.getElementById('modal-'+type);
+  if(m){ m.classList.add('hidden'); m.classList.remove('flex'); }
+}
+function openArchitecture(){ openModal('arch'); }
+function toast(msg){
+  const t=document.getElementById('toast'); document.getElementById('toastMsg').textContent=msg;
+  t.classList.remove('hidden'); t.classList.add('flex');
+  setTimeout(()=>{ t.classList.add('hidden'); t.classList.remove('flex'); },3000);
+}
+function handleGlobalSearch(v){
+  if(!v) return;
+  const q=v.toLowerCase();
+  const found=students.filter(s=> s.name.toLowerCase().includes(q) || s.id.toLowerCase().includes(q));
+  if(found.length){ showSection('students'); document.getElementById('studentSearch').value=v; renderStudents(); }
+}
+
+// Render functions
+function renderRecentEnroll(){
+  const tbody=document.getElementById('recentEnrollBody');
+  tbody.innerHTML=students.slice(0,4).map(s=>`
+    <tr class="hover:bg-slate-50">
+      <td class="px-5 py-3 flex items-center gap-3">
+        <span class="w-9 h-9 rounded-full bg-slate-900 text-white flex items-center justify-center text-xs font-bold">${s.avatar}</span>
+        <div><p class="font-medium leading-none">${s.name}</p><p class="text-xs text-slate-500">${s.id}</p></div>
+      </td>
+      <td class="px-3 py-3"><span class="px-2.5 py-1 rounded-full bg-slate-100 border border-slate-200 text-xs font-medium">${s.class}</span></td>
+      <td class="px-3 py-3 text-xs text-slate-600">12 Apr 2024</td>
+      <td class="px-3 py-3"><span class="px-2.5 py-1 rounded-full text-xs font-semibold ${s.fees==='Paid'?'bg-emerald-50 text-emerald-700 border border-emerald-200':s.fees==='Partial'?'bg-amber-50 text-amber-700 border border-amber-200':'bg-red-50 text-red-700 border border-red-200'}">${s.fees}</span></td>
+    </tr>`).join('');
+}
+function renderDashNotices(){
+  const c=document.getElementById('dashNotices');
+  c.innerHTML=notices.slice(0,3).map(n=>{
+    const col=n.priority==='urgent'?'border-red-200 bg-red-50':n.priority==='high'?'border-amber-200 bg-amber-50':'border-slate-200 bg-slate-50';
+    const dot=n.priority==='urgent'?'bg-red-500':n.priority==='high'?'bg-amber-500':'bg-emerald-500';
+    return `<div class="p-3 rounded-xl border ${col} flex gap-3">
+      <span class="w-2 h-2 rounded-full ${dot} mt-2"></span>
+      <div><p class="text-sm font-semibold leading-tight">${n.title}</p><p class="text-xs text-slate-600 line-clamp-2 mt-1">${n.content}</p><p class="text-xs text-slate-500 mt-1">${n.date} • ${n.audience}</p></div>
+    </div>`;
+  }).join('');
+}
+function renderStudents(){
+  const q=(document.getElementById('studentSearch')?.value||'').toLowerCase();
+  const cf=document.getElementById('classFilter')?.value||'';
+  const ff=document.getElementById('feeFilter')?.value||'';
+  let filtered=students.filter(s=>{
+    const matchSearch = !q || s.name.toLowerCase().includes(q) || s.id.toLowerCase().includes(q) || s.class.toLowerCase().includes(q);
+    const matchClass = !cf || s.class===cf;
+    const matchFee = !ff || s.fees===ff;
+    return matchSearch && matchClass && matchFee;
+  });
+  document.getElementById('studentCount').textContent=filtered.length+' students';
+  document.getElementById('studentTable').innerHTML=filtered.map(s=>`
+    <tr class="hover:bg-slate-50">
+      <td class="px-5 py-3">
+        <div class="flex items-center gap-3">
+          <span class="w-10 h-10 rounded-full bg-[#E65100] text-white flex items-center justify-center text-xs font-bold">${s.avatar}</span>
+          <div><p class="font-semibold leading-none">${s.name}</p><p class="text-xs text-slate-500">${s.gender} • Age ${s.age}</p></div>
+        </div>
+      </td>
+      <td class="px-3 py-3"><p class="font-mono text-xs font-semibold">${s.id}</p><span class="inline-block mt-1 px-2 py-0.5 rounded-full bg-slate-900 text-white text-xs">${s.class}</span></td>
+      <td class="px-3 py-3"><p class="font-medium text-sm">${s.parent}</p><p class="text-xs text-slate-500">${s.phone}</p></td>
+      <td class="px-3 py-3"><p class="font-semibold">GH₵ ${s.total}</p><span class="text-xs px-2 py-0.5 rounded-full font-semibold ${s.fees==='Paid'?'bg-emerald-50 text-emerald-700 border border-emerald-200':s.fees==='Partial'?'bg-amber-50 text-amber-700 border border-amber-200':'bg-red-50 text-red-700 border border-red-200'}">${s.fees} • GH₵ ${s.balance} due</span></td>
+      <td class="px-3 py-3"><span class="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 text-xs font-semibold border border-emerald-200">${s.status}</span></td>
+      <td class="px-5 py-3"><div class="flex justify-end gap-1">
+        <button onclick="viewStudent('${s.id}')" class="w-8 h-8 rounded-full border border-slate-200 hover:bg-slate-50 flex items-center justify-center"><i class="fa-regular fa-eye text-xs"></i></button>
+        <button onclick="deleteStudent('${s.id}')" class="w-8 h-8 rounded-full border border-slate-200 hover:bg-red-50 text-red-600 flex items-center justify-center"><i class="fa-solid fa-trash text-xs"></i></button>
+      </div></td>
+    </tr>`).join('') || `<tr><td colspan="6" class="text-center py-10 text-slate-500">No students found</td></tr>`;
+}
+function viewStudent(id){ toast('Viewing '+id+' — Supabase: select * from students where id='+id); }
+function deleteStudent(id){
+  if(!confirm('Delete '+id+'?')) return;
+  students=students.filter(s=>s.id!==id);
+  renderStudents(); renderRecentEnroll(); renderFees(); renderAttendance(); populatePaySelect(); toast('Deleted '+id);
+}
+function addStudent(e){
+  e.preventDefault();
+  const fd=new FormData(e.target);
+  const s={
+    id:fd.get('id'), name:fd.get('name'), class:fd.get('class'), gender:fd.get('gender'),
+    age:9, parent:fd.get('parent'), phone:fd.get('phone'), fees:'Due', paid:0, balance:850, total:850, status:'Active', avatar:fd.get('name').split(' ').map(n=>n[0]).join('').slice(0,2).toUpperCase()
+  };
+  students.unshift(s);
+  attendanceState[s.id]='Present';
+  closeModal('student'); e.target.reset();
+  renderStudents(); renderRecentEnroll(); renderFees(); renderAttendance(); populatePaySelect(); toast('Student '+s.name+' added ✓');
+}
+function renderTeachers(){
+  const grid=document.getElementById('teacherGrid');
+  grid.innerHTML=teachers.map(t=>`
+    <div class="bg-white rounded-2xl border border-slate-200 p-5 flex gap-4">
+      <img src="${t.avatar}" class="w-14 h-14 rounded-2xl object-cover">
+      <div class="flex-1 min-w-0">
+        <p class="font-semibold leading-none">${t.name}</p><p class="text-xs text-slate-500">${t.role} • ${t.subject}</p>
+        <p class="text-xs mt-2 inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full ${t.status==='Active'?'bg-emerald-50 text-emerald-700 border border-emerald-200':'bg-amber-50 text-amber-700 border border-amber-200'}"><span class="w-1.5 h-1.5 rounded-full ${t.status==='Active'?'bg-emerald-500':'bg-amber-500'}"></span> ${t.status}</p>
+        <p class="text-xs text-slate-600 mt-2"><i class="fa-solid fa-phone mr-1 text-slate-400"></i>${t.phone}</p>
+      </div>
+      <span class="text-xs font-mono bg-slate-900 text-white px-2 py-1 rounded-full h-fit">${t.id}</span>
+    </div>`).join('');
+  document.getElementById('teacherTable').innerHTML=teachers.map(t=>`
+    <tr class="hover:bg-slate-50">
+      <td class="px-5 py-3 flex items-center gap-3"><img src="${t.avatar}" class="w-8 h-8 rounded-full"><span class="font-medium">${t.name}</span></td>
+      <td class="px-3 py-3"><span class="px-2 py-1 rounded-full bg-slate-100 border border-slate-200 text-xs">${t.role}</span></td>
+      <td class="px-3 py-3 text-sm">${t.subject} ${t.class!=='—'? '• '+t.class:''}</td>
+      <td class="px-3 py-3 text-sm">${t.phone}</td>
+      <td class="px-3 py-3"><span class="text-xs font-semibold px-2 py-1 rounded-full ${t.status==='Active'?'bg-emerald-50 text-emerald-700':'bg-amber-50 text-amber-700'}">${t.status}</span></td>
+      <td class="px-5 py-3 text-right"><button onclick="toast('Message sent to ${t.name}')" class="text-xs font-semibold text-[#E65100] hover:underline">Message</button></td>
+    </tr>`).join('');
+}
+function addTeacher(e){
+  e.preventDefault();
+  const fd=new FormData(e.target);
+  teachers.unshift({id:fd.get('id'), name:fd.get('name'), role:fd.get('role'), subject:fd.get('subject'), class:'—', phone:fd.get('phone'), status:'Active', avatar:'https://i.pravatar.cc/100?img='+Math.floor(Math.random()*70)});
+  closeModal('teacher'); e.target.reset(); renderTeachers(); toast('Staff added');
+}
+function renderClasses(){
+  document.getElementById('classGrid').innerHTML=classes.map(c=>{
+    const pct=Math.round(c.students/c.capacity*100);
+    return `<div class="bg-white rounded-2xl border border-slate-200 overflow-hidden">
+      <div class="h-1.5 ${c.color}"></div>
+      <div class="p-5">
+        <div class="flex items-start justify-between">
+          <div><p class="font-display font-bold">${c.name}</p><p class="text-xs text-slate-500">${c.room}</p></div>
+          <span class="px-2.5 py-1 rounded-full bg-slate-900 text-white text-xs font-medium">${c.students} / ${c.capacity}</span>
+        </div>
+        <div class="mt-3 h-2 bg-slate-100 rounded-full overflow-hidden"><div class="h-full ${c.color} rounded-full" style="width:${pct}%"></div></div>
+        <p class="text-xs text-slate-500 mt-1">${pct}% capacity • ${c.capacity - c.students} seats left</p>
+        <div class="mt-4 flex items-center gap-2 text-sm"><img src="https://i.pravatar.cc/100?img=${Math.floor(Math.random()*30)+10}" class="w-7 h-7 rounded-full"><span class="text-xs"><b>${c.teacher}</b> — Class Teacher</span></div>
+      </div>
+    </div>`;
+  }).join('');
+  document.getElementById('subjectList').innerHTML=subjects.map(s=>`
+    <div class="flex items-center gap-3 p-3 rounded-xl border border-slate-200 hover:bg-slate-50">
+      <span class="w-10 h-10 rounded-xl flex items-center justify-center ${s.color}"><i class="fa-solid ${s.icon}"></i></span>
+      <div><p class="text-sm font-semibold">${s.name}</p><p class="text-xs text-slate-500">${s.teacher}</p></div>
+      <i class="fa-solid fa-chevron-right ml-auto text-xs text-slate-400"></i>
+    </div>`).join('');
+}
+function renderAttendance(){
+  const cls=document.getElementById('attClass')?.value||'Basic 4';
+  document.getElementById('attClassLabel').textContent=cls;
+  const list=students.filter(s=> s.class===cls);
+  document.getElementById('attendanceBody').innerHTML=list.map(s=>`
+    <tr>
+      <td class="px-5 py-3 flex items-center gap-3"><span class="w-8 h-8 rounded-full bg-slate-900 text-white flex items-center justify-center text-xs font-bold">${s.avatar}</span><div><p class="font-medium text-sm">${s.name}</p><p class="text-xs text-slate-500">${s.id}</p></div></td>
+      <td class="text-center"><input type="radio" name="att-${s.id}" ${attendanceState[s.id]==='Present'?'checked':''} onclick="setAtt('${s.id}','Present')" class="w-5 h-5 accent-emerald-600"></td>
+      <td class="text-center"><input type="radio" name="att-${s.id}" ${attendanceState[s.id]==='Absent'?'checked':''} onclick="setAtt('${s.id}','Absent')" class="w-5 h-5 accent-red-600"></td>
+      <td class="text-center"><input type="radio" name="att-${s.id}" ${attendanceState[s.id]==='Late'?'checked':''} onclick="setAtt('${s.id}','Late')" class="w-5 h-5 accent-amber-600"></td>
+      <td class="px-3 py-3"><input placeholder="Remark" class="w-full px-3 py-1.5 rounded-full border border-slate-200 text-xs"></td>
+    </tr>`).join('') || `<tr><td colspan="5" class="text-center py-6 text-slate-500">No students in ${cls}</td></tr>`;
+  updateAttCounts();
+}
+function setAtt(id,val){ attendanceState[id]=val; updateAttCounts(); }
+function markAll(val){
+  const cls=document.getElementById('attClass').value;
+  students.filter(s=>s.class===cls).forEach(s=> attendanceState[s.id]=val);
+  renderAttendance(); toast('Marked all as '+val);
+}
+function updateAttCounts(){
+  const cls=document.getElementById('attClass').value;
+  const list=students.filter(s=>s.class===cls);
+  let p=0,l=0,a=0;
+  list.forEach(s=>{
+    const v=attendanceState[s.id];
+    if(v==='Present') p++; else if(v==='Late') l++; else a++;
+  });
+  document.getElementById('attPresent').textContent=p;
+  document.getElementById('attLate').textContent=l;
+  document.getElementById('attAbsent').textContent=a;
+}
+function saveAttendance(){ toast('Attendance saved to Supabase attendance table ✓'); }
+
+function renderFees(){
+  const q=(document.getElementById('feeSearch')?.value||'').toLowerCase();
+  const f=document.getElementById('feeStatusFilter')?.value||'';
+  let filtered=students.filter(s=>{
+    const mq=!q || s.name.toLowerCase().includes(q) || s.id.toLowerCase().includes(q);
+    const mf=!f || s.fees===f;
+    return mq && mf;
+  });
+  document.getElementById('feeTable').innerHTML=filtered.map(s=>`
+    <tr class="hover:bg-slate-50">
+      <td class="px-5 py-3 flex items-center gap-3"><span class="w-9 h-9 rounded-full bg-slate-900 text-white flex items-center justify-center text-xs font-bold">${s.avatar}</span><div><p class="font-medium text-sm">${s.name}</p><p class="text-xs text-slate-500">${s.id}</p></div></td>
+      <td class="px-3 py-3"><span class="px-2 py-1 rounded-full bg-slate-100 text-xs">${s.class}</span></td>
+      <td class="px-3 py-3 font-medium">GH₵ ${s.total}</td>
+      <td class="px-3 py-3 text-emerald-700 font-semibold">GH₵ ${s.paid}</td>
+      <td class="px-3 py-3 ${s.balance>0?'text-red-600 font-bold':'text-slate-400'}">GH₵ ${s.balance}</td>
+      <td class="px-3 py-3"><span class="px-2.5 py-1 rounded-full text-xs font-semibold border ${s.fees==='Paid'?'bg-emerald-50 text-emerald-700 border-emerald-200':s.fees==='Partial'?'bg-amber-50 text-amber-700 border-amber-200':'bg-red-50 text-red-700 border-red-200'}">${s.fees}</span></td>
+      <td class="px-5 py-3 text-right"><button onclick="openPayFor('${s.id}')" class="px-3 py-1.5 rounded-full bg-[#E65100] text-white text-xs font-semibold hover:bg-[#BF360C]">Pay</button></td>
+    </tr>`).join('');
+}
+function populatePaySelect(){
+  const sel=document.getElementById('payStudent');
+  sel.innerHTML=students.map(s=>`<option value="${s.id}">${s.name} — ${s.id} • Bal: GH₵ ${s.balance}</option>`).join('');
+}
+function openPayFor(id){
+  openModal('payment');
+  setTimeout(()=>{ document.getElementById('payStudent').value=id; },50);
+}
+function recordPayment(e){
+  e.preventDefault();
+  const fd=new FormData(e.target);
+  const id=document.getElementById('payStudent').value;
+  const amt=parseInt(fd.get('amount'));
+  const s=students.find(x=>x.id===id);
+  if(s){
+    s.paid+=amt; s.balance=Math.max(0,s.total - s.paid);
+    s.fees=s.balance===0?'Paid': s.paid>0?'Partial':'Due';
+    renderFees(); renderStudents(); toast('Payment GH₵ '+amt+' recorded for '+s.name+' ✓');
+  }
+  closeModal('payment'); e.target.reset();
+}
+
+function renderExpenses(){
+  document.getElementById('expenseTable').innerHTML=expenses.map(ex=>`
+    <tr><td class="px-3 py-2 text-xs">${ex.date}</td><td class="px-3 py-2"><span class="px-2 py-1 rounded-full bg-slate-100 text-xs font-medium">${ex.category}</span></td><td class="px-3 py-2 text-sm">${ex.desc}</td><td class="px-3 py-2 text-right font-semibold">GH₵ ${ex.amount.toLocaleString()}</td><td class="px-3 py-2 text-right"><button onclick="removeExpense(${ex.id})" class="text-red-500 hover:text-red-700"><i class="fa-solid fa-trash text-xs"></i></button></td></tr>`).join('');
+  const total=expenses.reduce((a,b)=>a+b.amount,0);
+  document.getElementById('totalExpense').textContent=total.toLocaleString();
+  const byCat={};
+  expenses.forEach(e=> byCat[e.category]=(byCat[e.category]||0)+e.amount);
+  document.getElementById('expenseSummary').innerHTML=Object.entries(byCat).map(([k,v])=>`
+    <div class="flex justify-between text-xs"><span>${k}</span><span class="font-semibold">GH₵ ${v.toLocaleString()}</span></div>`).join('');
+}
+function addExpense(e){
+  e.preventDefault();
+  const fd=new FormData(e.target);
+  expenses.unshift({id:Date.now(), date:new Date().toISOString().slice(0,10), category:fd.get('category'), desc:fd.get('desc'), amount:parseInt(fd.get('amount'))});
+  closeModal('expense'); e.target.reset(); renderExpenses(); renderExpenseChart(); toast('Expense added');
+}
+function removeExpense(id){ expenses=expenses.filter(e=>e.id!==id); renderExpenses(); renderExpenseChart(); }
+
+function renderExams(){
+  const cls=document.getElementById('examClass').value;
+  // simple filter: show all for demo
+  document.getElementById('examTable').innerHTML=examResults.map((r,i)=>{
+    const total=r.m+r.e+r.s+r.o;
+    const avg=(total/4).toFixed(1);
+    let grade='E', col='bg-red-100 text-red-700';
+    if(avg>=80){grade='A'; col='bg-emerald-100 text-emerald-700';}
+    else if(avg>=65){grade='B'; col='bg-blue-100 text-blue-700';}
+    else if(avg>=50){grade='C'; col='bg-amber-100 text-amber-700';}
+    else if(avg>=35){grade='D'; col='bg-orange-100 text-orange-700';}
+    return `<tr class="hover:bg-slate-50">
+      <td class="px-4 py-3"><p class="font-medium text-sm">${r.name}</p><p class="text-xs text-slate-500">${r.id}</p></td>
+      <td class="text-center font-medium">${r.m}</td><td class="text-center">${r.e}</td><td class="text-center">${r.s}</td><td class="text-center">${r.o}</td>
+      <td class="text-center font-bold">${total}</td><td class="text-center">${avg}</td>
+      <td class="text-center"><span class="px-2 py-1 rounded-full text-xs font-bold ${col}">${grade}</span></td>
+      <td class="text-center font-semibold">${i+1}${i===0?'st':i===1?'nd':i===2?'rd':'th'}</td>
+      <td class="text-right px-4"><button onclick="showReport('${r.id}')" class="px-3 py-1 rounded-full border border-slate-200 text-xs font-semibold hover:bg-slate-50"><i class="fa-solid fa-eye mr-1"></i>View</button></td>
+    </tr>`;
+  }).join('');
+}
+function generateReportCards(){
+  document.getElementById('reportCard').classList.remove('hidden');
+  showReport(examResults[0].id);
+  toast('Report cards generated — ready to print');
+  document.getElementById('reportCard').scrollIntoView({behavior:'smooth'});
+}
+function showReport(id){
+  const r=examResults.find(x=>x.id===id);
+  const st=students.find(s=>s.id===id) || {name:r.name, class:'Basic 4'};
+  const total=r.m+r.e+r.s+r.o; const avg=(total/4).toFixed(1);
+  document.getElementById('reportCard').classList.remove('hidden');
+  document.getElementById('reportCardContent').innerHTML=`
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm border border-slate-200 rounded-xl p-4 bg-slate-50">
+      <div><p class="text-xs text-slate-500">Pupil</p><p class="font-bold">${r.name} (${r.id})</p><p class="text-xs">Class: ${st.class} • Age: 9</p></div>
+      <div><p class="text-xs text-slate-500">Term</p><p class="font-bold">Term 2 — 2024/2025</p><p class="text-xs">Attendance: 94% • Position: 1st of 32</p></div>
+      <div class="text-right"><p class="text-xs text-slate-500">Average • Grade</p><p class="text-2xl font-bold">${avg} • <span class="text-[#E65100]">A</span></p></div>
+    </div>
+    <table class="w-full mt-4 text-sm border border-slate-200 rounded-xl overflow-hidden">
+      <thead class="bg-slate-100 text-xs"><tr><th class="text-left px-3 py-2">Subject</th><th class="text-center px-3 py-2">Score</th><th class="text-center px-3 py-2">Grade</th><th class="text-left px-3 py-2">Remarks</th></tr></thead>
+      <tbody class="divide-y divide-slate-100">
+        <tr><td class="px-3 py-2">Mathematics</td><td class="text-center font-bold">${r.m}</td><td class="text-center"><span class="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-700 text-xs font-bold">A</span></td><td class="text-xs">Excellent — Keep it up!</td></tr>
+        <tr><td class="px-3 py-2">English Language</td><td class="text-center font-bold">${r.e}</td><td class="text-center"><span class="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-700 text-xs font-bold">A</span></td><td class="text-xs">Very Good</td></tr>
+        <tr><td class="px-3 py-2">Integrated Science</td><td class="text-center font-bold">${r.s}</td><td class="text-center"><span class="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-700 text-xs font-bold">A</span></td><td class="text-xs">Excellent</td></tr>
+        <tr><td class="px-3 py-2">OWOP</td><td class="text-center font-bold">${r.o}</td><td class="text-center"><span class="px-2 py-0.5 rounded-full bg-blue-100 text-blue-700 text-xs font-bold">B</span></td><td class="text-xs">Good</td></tr>
+      </tbody>
+    </table>
+    <div class="mt-4 grid grid-cols-2 gap-4 text-xs">
+      <div class="p-3 rounded-xl border border-slate-200"><p class="font-semibold">Class Teacher's Remark</p><p class="mt-1 text-slate-600">"Ama is a brilliant and disciplined pupil. She should maintain the effort."</p><p class="mt-2 font-semibold">— Mrs. Grace Owusu</p></div>
+      <div class="p-3 rounded-xl border border-slate-200"><p class="font-semibold">Headmaster's Remark</p><p class="mt-1 text-slate-600">"Promoted to next class. Excellent performance."</p><p class="mt-2 font-semibold">— Mr. Kwabena Mensah</p></div>
+    </div>
+    <div class="mt-4 flex justify-end gap-2"><button onclick="window.print()" class="px-4 py-2 rounded-full bg-slate-900 text-white text-xs font-semibold"><i class="fa-solid fa-print mr-1"></i> Print</button><button onclick="document.getElementById('reportCard').classList.add('hidden')" class="px-4 py-2 rounded-full border border-slate-200 text-xs font-semibold">Close</button></div>
+  `;
+}
+
+function renderParents(){
+  const q=(document.getElementById('parentSearch')?.value||'').toLowerCase();
+  let filtered=students.filter(s=> !q || s.parent.toLowerCase().includes(q) || s.name.toLowerCase().includes(q));
+  document.getElementById('parentGrid').innerHTML=filtered.map(s=>`
+    <div class="bg-white rounded-2xl border border-slate-200 p-5">
+      <div class="flex items-center gap-3">
+        <img src="https://i.pravatar.cc/100?img=${Math.floor(Math.random()*50)+10}" class="w-12 h-12 rounded-full">
+        <div><p class="font-semibold text-sm">${s.parent}</p><p class="text-xs text-slate-500">Parent of ${s.name} • ${s.class}</p></div>
+        <span class="ml-auto w-2 h-2 bg-emerald-500 rounded-full"></span>
+      </div>
+      <div class="mt-4 space-y-2 text-sm">
+        <p class="flex items-center gap-2"><i class="fa-solid fa-phone text-slate-400 text-xs"></i> ${s.phone}</p>
+        <p class="flex items-center gap-2"><i class="fa-solid fa-location-dot text-slate-400 text-xs"></i> Effiduasi, Ashanti - Ghana</p>
+        <p class="flex items-center gap-2"><i class="fa-solid fa-user-graduate text-slate-400 text-xs"></i> Ward ID: ${s.id} • Fees: <span class="${s.fees==='Paid'?'text-emerald-600':'text-red-600'} font-semibold">${s.fees}</span></p>
+      </div>
+      <div class="mt-4 flex gap-2">
+        <button onclick="toast('SMS sent to ${s.parent}')" class="flex-1 py-2 rounded-full bg-[#E65100] text-white text-xs font-semibold"><i class="fa-solid fa-message mr-1"></i> SMS</button>
+        <button onclick="toast('Calling ${s.phone}...')" class="flex-1 py-2 rounded-full border border-slate-200 text-xs font-semibold"><i class="fa-solid fa-phone mr-1"></i> Call</button>
+      </div>
+    </div>`).join('');
+}
+
+function renderNotices(){
+  document.getElementById('noticeList').innerHTML=notices.map((n,i)=>`
+    <div class="bg-white rounded-2xl border border-slate-200 p-5">
+      <div class="flex items-start justify-between gap-3">
+        <div class="flex gap-3">
+          <span class="w-10 h-10 rounded-xl flex items-center justify-center ${n.priority==='urgent'?'bg-red-500 text-white':n.priority==='high'?'bg-amber-500 text-white':'bg-slate-900 text-white'}"><i class="fa-solid ${n.priority==='urgent'?'fa-triangle-exclamation':n.priority==='high'?'fa-star':'fa-bullhorn'} text-sm"></i></span>
+          <div><p class="font-semibold leading-tight">${n.title}</p><p class="text-xs text-slate-500">${n.date} • ${n.audience} • by ${n.author}</p></div>
+        </div>
+        <span class="px-2.5 py-1 rounded-full text-xs font-bold border ${n.priority==='urgent'?'bg-red-50 text-red-700 border-red-200':n.priority==='high'?'bg-amber-50 text-amber-700 border-amber-200':'bg-slate-50 text-slate-700 border-slate-200'}">${n.priority.toUpperCase()}</span>
+      </div>
+      <p class="text-sm text-slate-700 mt-3 leading-relaxed">${n.content}</p>
+      <div class="mt-4 flex gap-2">
+        <button onclick="toast('Broadcast via SMS sent')" class="px-3 py-1.5 rounded-full bg-slate-900 text-white text-xs font-semibold"><i class="fa-solid fa-paper-plane mr-1"></i> Resend SMS</button>
+        <button onclick="notices.splice(${i},1); renderNotices(); renderDashNotices(); toast('Notice deleted')" class="px-3 py-1.5 rounded-full border border-slate-200 text-xs font-semibold">Delete</button>
+      </div>
+    </div>`).join('');
+}
+function createNotice(e){
+  e.preventDefault();
+  const fd=new FormData(e.target);
+  notices.unshift({title:fd.get('title'), content:fd.get('content'), date:new Date().toISOString().slice(0,10), audience:fd.get('audience'), priority:fd.get('priority'), author:'Headmaster'});
+  e.target.reset(); closeModal('notice'); renderNotices(); renderDashNotices(); toast('Notice published ✓');
+}
+
+function renderRoles(){
+  const roles=[
+    {name:'Admin (Headmaster)', dash:true, students:true, finance:true, att:true, exams:true, notices:true, settings:true, color:'bg-slate-900'},
+    {name:'Teacher', dash:true, students:true, finance:false, att:true, exams:true, notices:true, settings:false, color:'bg-blue-600'},
+    {name:'Bursar / Accountant', dash:true, students:true, finance:true, att:false, exams:false, notices:true, settings:false, color:'bg-emerald-600'},
+    {name:'Parent', dash:true, students:false, finance:true, att:true, exams:true, notices:true, settings:false, color:'bg-[#E65100]'},
+  ];
+  document.getElementById('rolesTable').innerHTML=roles.map(r=>`
+    <tr>
+      <td class="px-5 py-3"><span class="inline-flex items-center gap-2"><span class="w-2 h-2 rounded-full ${r.color}"></span><span class="font-medium text-sm">${r.name}</span></span></td>
+      <td class="text-center"><input type="checkbox" ${r.dash?'checked':''} class="toggle"></td>
+      <td class="text-center"><input type="checkbox" ${r.students?'checked':''} class="toggle"></td>
+      <td class="text-center"><input type="checkbox" ${r.finance?'checked':''} class="toggle"></td>
+      <td class="text-center"><input type="checkbox" ${r.att?'checked':''} class="toggle"></td>
+      <td class="text-center"><input type="checkbox" ${r.exams?'checked':''} class="toggle"></td>
+      <td class="text-center"><input type="checkbox" ${r.notices?'checked':''} class="toggle"></td>
+      <td class="text-center"><input type="checkbox" ${r.settings?'checked':''} class="toggle"></td>
+    </tr>`).join('');
+}
+function exportReport(){ toast('Report exported — PDF ready for download'); }
+
+// Charts
+let attendanceChart, financeChart, expenseChart, enrollChart, revenueChart, performanceChart;
+function initDashCharts(){
+  const ctxA=document.getElementById('attendanceChart');
+  if(ctxA){
+    attendanceChart=new Chart(ctxA,{
+      type:'line',
+      data:{
+        labels:['Mon','Tue','Wed','Thu','Fri','Sat','Today'],
+        datasets:[{label:'Present %', data:[92,93,91,94,95,0,94.2], borderColor:'#E65100', backgroundColor:'rgba(230,81,0,0.08)', tension:0.4, fill:true, pointRadius:4, pointBackgroundColor:'#E65100'}]
+      },
+      options:{responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}}, scales:{y:{min:80,max:100, grid:{color:'#F1F5F9'}}, x:{grid:{display:false}}}}
+    });
+  }
+  const ctxF=document.getElementById('financeChart');
+  if(ctxF){
+    financeChart=new Chart(ctxF,{
+      type:'bar',
+      data:{
+        labels:['Creche','Nursery','KG','Primary','JHS'],
+        datasets:[
+          {label:'Collected', data:[38000,29000,42000,48000,32000], backgroundColor:'#E65100', borderRadius:8},
+          {label:'Due', data:[8000,5000,7000,12000,6000], backgroundColor:'#E2E8F0', borderRadius:8}
+        ]
+      },
+      options:{responsive:true, maintainAspectRatio:false, plugins:{legend:{position:'bottom',labels:{boxWidth:12}}}, scales:{y:{grid:{color:'#F1F5F9'}}, x:{grid:{display:false}}}}
+    });
+  }
+}
+function renderExpenseChart(){
+  const ctx=document.getElementById('expenseChart');
+  if(!ctx) return;
+  if(expenseChart) expenseChart.destroy();
+  const byCat={}; expenses.forEach(e=> byCat[e.category]=(byCat[e.category]||0)+e.amount);
+  expenseChart=new Chart(ctx,{
+    type:'doughnut',
+    data:{
+      labels:Object.keys(byCat),
+      datasets:[{data:Object.values(byCat), backgroundColor:['#E65100','#0F172A','#0EA5E9','#10B981','#F59E0B','#8B5CF6'], borderWidth:0}]
+    },
+    options:{responsive:true, maintainAspectRatio:false, plugins:{legend:{position:'bottom',labels:{boxWidth:12, font:{size:11}}}} , cutout:'62%'}
+  });
+}
+function initReportsCharts(){
+  const c1=document.getElementById('enrollChart'); if(c1){
+    if(enrollChart) enrollChart.destroy();
+    enrollChart=new Chart(c1,{type:'bar', data:{labels:['Cre','N1','N2','KG1','KG2','B1','B4','B6','JHS1','JHS2'], datasets:[{data:[18,22,24,28,26,30,32,30,29,27], backgroundColor:'#E65100', borderRadius:6}]}, options:{responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}}, scales:{y:{grid:{color:'#F1F5F9'}},x:{grid:{display:false}}}}}
+  )}
+  const c2=document.getElementById('revenueChart'); if(c2){
+    if(revenueChart) revenueChart.destroy();
+    revenueChart=new Chart(c2,{type:'line', data:{labels:['Nov','Dec','Jan','Feb','Mar','Apr'], datasets:[
+      {label:'Revenue', data:[42000,48000,51000,62000,58000,68000], borderColor:'#10B981', backgroundColor:'rgba(16,185,129,0.08)', fill:true, tension:0.4},
+      {label:'Expenses', data:[28000,31000,29000,35000,32000,30000], borderColor:'#EF4444', backgroundColor:'rgba(239,68,68,0.08)', fill:true, tension:0.4}
+    ]}, options:{responsive:true, maintainAspectRatio:false, plugins:{legend:{position:'bottom',labels:{boxWidth:12}}}, scales:{y:{grid:{color:'#F1F5F9'}},x:{grid:{display:false}}}}}
+  )}
+  const c3=document.getElementById('performanceChart'); if(c3){
+    if(performanceChart) performanceChart.destroy();
+    performanceChart=new Chart(c3,{type:'radar', data:{labels:['Maths','English','Science','OWOP','RME','Arts'], datasets:[{label:'Avg Score', data:[72,68,70,65,75,80], backgroundColor:'rgba(230,81,0,0.15)', borderColor:'#E65100', pointBackgroundColor:'#E65100'}]}, options:{responsive:true, maintainAspectRatio:false, scales:{r:{grid:{color:'#E2E8F0'}, pointLabels:{font:{size:11}}}}}
+  )}
+}
+
+// Init
+document.addEventListener('DOMContentLoaded',()=>{
+  renderRecentEnroll(); renderDashNotices(); renderStudents(); renderTeachers(); renderClasses(); renderAttendance(); renderFees(); renderExpenses(); renderExams(); renderParents(); renderNotices(); renderRoles();
+  initDashCharts(); renderExpenseChart();
+  populatePaySelect();
+  // close modals on outside click
+  ['student','teacher','payment','expense','notice','arch'].forEach(t=>{
+    const m=document.getElementById('modal-'+t);
+    if(m) m.addEventListener('click',e=>{ if(e.target===m) closeModal(t); });
+  });
+});
+</script>
+</body>
+</html>
